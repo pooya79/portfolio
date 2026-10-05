@@ -5,9 +5,9 @@
   --bg: #f5f7f0;
   --sidebar: #eef2e8;
   --surface: #fcfdf9;
-  --text: #253b2f;
-  --muted: #5e6f61;
-  --accent: #315f40;
+  --text: #10151c;
+  --muted: #4b5361;
+  --accent: #60752f;
   --accent-soft: #dde8d5;
   --button-text: #f7faf3;
   --border: #dce3d6;
@@ -31,7 +31,7 @@
 :root[data-theme='dark'] {
   --bg: #15231c;
   --sidebar: #192920;
-  --surface: #1e3025;
+  --surface: #142733;
   --text: #e2e9dc;
   --muted: #a4b5a4;
   --accent: #bfd5a6;

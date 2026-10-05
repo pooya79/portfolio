@@ -1,51 +1,60 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
-import { ArrowRightIcon, ArrowUpRightIcon, LeafIcon, NotebookIcon, SquaresFourIcon } from '@phosphor-icons/react'
-import { Reveal } from '../../components/Reveal'
-import { Garden } from '../../components/Garden'
-import { BotanicalArt } from '../../components/BotanicalArt'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { ArrowRightIcon, CaretLeftIcon, CaretRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react'
 import { projects } from '../projects/data'
-import { posts } from '../blogs/data'
+import { Landscape } from './Landscape'
+import { useTheme } from '../../theme/theme'
+import { landscapeAssets } from './sceneAssets'
 import styles from './Home.module.css'
 
+const featured = [
+  { project: projects.find(project => project.slug === 'robust-speech-recognition')!, tags: ['AI', 'Speech', 'Scalability'] },
+  { project: projects.find(project => project.slug === 'living-web')!, tags: ['React', 'Design', 'Motion'] },
+  { project: projects.find(project => project.slug === 'daylight-study')!, tags: ['Light', 'Color', 'Experiment'] },
+]
+
 export default function Home() {
-  return <>
-    <Reveal>
-      <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <span className={styles.welcome}><LeafIcon size={16} weight="duotone" /> Welcome to my digital garden</span>
-          <h1>Ideas take root.<br /><span>Good things grow.</span></h1>
-          <p>I’m Pouya. This is my space for projects, thoughts, and a more thoughtful, nature-inspired web.</p>
-          <div className={styles.heroActions}><Link className="button" to="/projects">Explore projects <ArrowUpRightIcon size={17} /></Link><Link className="text-link" to="/about">A little about me <ArrowRightIcon size={16} /></Link></div>
+  const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const reduced = useReducedMotion()
+  const { theme } = useTheme()
+  const { project, tags } = featured[index]
+  return <section className={styles.hero} aria-labelledby="hero-title">
+    <Landscape paused={paused} />
+    <div className={styles.composition}>
+      <motion.div className={styles.heroCopy} initial={reduced ? false : { y: 18 }} animate={{ y: 0 }} transition={{ duration: .65 }}>
+        <h1 id="hero-title">Building<br /><span>brighter</span><br />tomorrows.</h1>
+        <p>I’m <strong>Pouya Fallah</strong>. I build AI systems, contribute to research, and design scalable backend infrastructure to help create a more open, intelligent, and hopeful future.</p>
+        <Link className={styles.explore} to="/projects">EXPLORE MY WORK <ArrowRightIcon size={25} /></Link>
+      </motion.div>
+      <motion.aside className={styles.featured} aria-label="Featured projects" initial={reduced ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .4 }}>
+        <div className={styles.cardHeader}>
+          <span>FEATURED PROJECT</span>
+          <div className={styles.carouselControls}>
+            <span className={styles.count}>{String(index + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}</span>
+            <button aria-label="Previous featured project" onClick={() => setIndex((index + featured.length - 1) % featured.length)}><CaretLeftIcon size={18} /></button>
+            <button aria-label="Next featured project" onClick={() => setIndex((index + 1) % featured.length)}><CaretRightIcon size={18} /></button>
+          </div>
         </div>
-        <div className={styles.heroArt}><BotanicalArt /><span className={styles.artCaption}>Nature and technology, growing together.</span></div>
-      </section>
-    </Reveal>
-
-    <Reveal delay={0.08}>
-      <section className={styles.overview} aria-label="Portfolio overview">
-        <Link to="/projects" className={styles.overviewLink}><span className={styles.overviewIcon}><SquaresFourIcon size={24} weight="duotone" /></span><span><strong>Projects</strong><small>{projects.length} starter explorations</small></span><ArrowUpRightIcon size={20} /></Link>
-        <Link to="/blogs" className={styles.overviewLink}><span className={styles.overviewIcon}><NotebookIcon size={24} weight="duotone" /></span><span><strong>The journal</strong><small>{posts.length} sample stories to begin with</small></span><ArrowUpRightIcon size={20} /></Link>
-      </section>
-    </Reveal>
-
-    <div className={styles.featureGrid}>
-      <Reveal delay={0.12}>
-        <section className={styles.feature} aria-labelledby="featured-heading">
-          <div className={styles.sectionHeader}><h2 id="featured-heading">Taking shape</h2><Link to="/projects" className="text-link">All projects <ArrowUpRightIcon size={15} /></Link></div>
-          <Link to="/projects/living-web" className={styles.project}>
-            <BotanicalArt compact />
-            <div className={styles.projectCopy}><div className={styles.projectMeta}><span>Interface exploration</span><span>Sample project</span></div><h3>The living web <ArrowUpRightIcon size={24} /></h3><p>{projects[0].description}</p></div>
-          </Link>
-        </section>
-      </Reveal>
-      <Reveal delay={0.18}><Garden /></Reveal>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div key={project.slug} initial={reduced ? false : { opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: reduced ? 0 : -8 }} transition={{ duration: reduced ? 0 : .18 }}>
+            <div className={styles.preview}>
+              <img src={landscapeAssets[theme]} alt="" width={1672} height={941} className={styles[`preview${index}`]} />
+            </div>
+            <div aria-live="polite" aria-atomic="true">
+              <h2>{project.title}</h2>
+              <p className={styles.description}>{project.description}</p>
+              <ul className={styles.tags} aria-label="Project topics">{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+            </div>
+            <Link className={styles.projectLink} to={`/projects/${project.slug}`}>VIEW PROJECT <ArrowRightIcon size={25} /></Link>
+          </motion.div>
+        </AnimatePresence>
+      </motion.aside>
     </div>
-
-    <Reveal delay={0.2}>
-      <section className={styles.writing} aria-labelledby="writing-heading">
-        <div className={styles.sectionHeader}><h2 id="writing-heading">A few growing thoughts</h2><Link to="/blogs" className="text-link">Visit the journal <ArrowUpRightIcon size={15} /></Link></div>
-        <div className={styles.writingList}>{posts.map(post => <Link to={`/blogs/${post.slug}`} key={post.slug} className={styles.post}><span className={styles.postIcon}><NotebookIcon size={21} weight="duotone" /></span><span><small>{post.category} / Sample article</small><h3>{post.title}</h3></span><ArrowUpRightIcon size={20} /></Link>)}</div>
-      </section>
-    </Reveal>
-  </>
+    <div className={styles.sceneControls}>
+      <span className={styles.sceneCaption}>A future worth building.</span>
+      {!reduced && <button onClick={() => setPaused(!paused)} aria-pressed={paused} aria-label={paused ? 'Resume motion in the scene' : 'Pause motion in the scene'}>{paused ? <PlayIcon size={15} /> : <PauseIcon size={15} />}<span>{paused ? 'Resume motion' : 'Pause motion'}</span></button>}
+    </div>
+  </section>
 }

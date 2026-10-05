@@ -21,7 +21,9 @@ The included projects and articles are labeled samples. Replace them with real p
 
 Shared components live in `src/components`. Fonts are bundled locally. Shared assets belong in `src/assets`, and future generated images belong in `src/assets/images/generated`. Keep matching `<name>-light` and `<name>-dark` assets together and select the appropriate variant using `useTheme`.
 
-No images have been generated. The current botanical visuals use CSS and Phosphor SVG icons.
+The Home page recreates the supplied solarpunk reference with separate landscape and transparent foreground layers, each with matching day and night assets. Motion values drive pointer and scroll depth without React renders; CSS supplies subtle lake movement and drifting particles. Visitors can pause the scene, and reduced-motion preferences disable it automatically. The featured-project carousel links to the three project pages. The speech recognition entry is a clearly labeled outline based on the reference.
+
+The optimized WebP assets and generation notes live in `src/assets/images/generated/`. The scenery is decorative; all text, navigation, and project controls are semantic HTML.
 
 ## Static hosting
 

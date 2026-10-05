@@ -17,7 +17,7 @@ export default function App() {
   const previousPath = useRef(pathname)
   useEffect(() => {
     const name = pathname === '/' ? 'Home' : pathname.split('/').filter(Boolean).map(part => part.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')).join(' | ')
-    document.title = `Pouya's garden | ${name}`
+    document.title = `Pouya Fallah | ${name}`
     if (previousPath.current !== pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })
       document.getElementById('main-content')?.focus({ preventScroll: true })
@@ -26,7 +26,7 @@ export default function App() {
   }, [pathname])
 
   return <Shell>
-    <motion.div key={pathname} initial={reduced ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
+    <motion.div key={pathname} initial={reduced || pathname === '/' ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
       <Suspense fallback={<p role="status">Opening this corner of the garden…</p>}>
         <Routes>
           <Route path="/" element={<Home />} />

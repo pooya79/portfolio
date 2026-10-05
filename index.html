@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/images/generated/solarpunk-landscape-light.webp" as="image" fetchpriority="high" media="not all" data-scene-theme="light" />
+    <link rel="preload" href="/src/assets/images/generated/solarpunk-landscape-dark.webp" as="image" fetchpriority="high" media="not all" data-scene-theme="dark" />
     <meta name="theme-color" content="#f5f7f0" />
-    <meta name="description" content="Pouya's digital garden. A solarpunk portfolio of projects, writing, and thoughtful web experiments." />
-    <title>Pouya's garden | Home</title>
+    <meta name="description" content="Pouya Fallah's solarpunk portfolio. AI systems, research, and scalable infrastructure for a brighter tomorrow." />
+    <title>Pouya Fallah | Home</title>
     <script>
       try {
         const preference = localStorage.getItem('portfolio-theme');
@@ -14,6 +17,11 @@
           ? preference : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       } catch {
         document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      if (['', '#', '#/'].includes(location.hash)) {
+        document.querySelectorAll('[data-scene-theme]').forEach(link => {
+          link.media = link.dataset.sceneTheme === document.documentElement.dataset.theme ? 'all' : 'not all';
+        });
       }
     </script>
   </head>
