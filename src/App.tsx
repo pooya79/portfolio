@@ -4,12 +4,12 @@ import { motion, useReducedMotion } from 'motion/react'
 import { Shell } from './components/Shell'
 import Projects from './pages/projects'
 import Home from './pages/home'
+import Contact from './pages/contact'
 
 const ProjectDetail = lazy(() => import('./pages/projects/ProjectDetail'))
 const Blogs = lazy(() => import('./pages/blogs'))
 const BlogDetail = lazy(() => import('./pages/blogs/BlogDetail'))
 const About = lazy(() => import('./pages/about'))
-const Contact = lazy(() => import('./pages/contact'))
 
 export default function App() {
   const { pathname } = useLocation()

@@ -17,7 +17,7 @@ Open the local URL printed by Vite. Run `npm run lint` for linting, `npm run typ
 
 The five navigation pages live in `src/pages/home`, `projects`, `blogs`, `about`, and `contact`. Each project or blog post has its own slug directory with a typed content export. Add that export to the corresponding `data.ts` collection to make it appear in the listing and detail route.
 
-The included projects and articles are labeled samples. Replace them with real portfolio content. The Contact page saves a text draft locally; it does not send messages. Add your contact details before publishing.
+The included projects and articles are labeled samples. Replace them with real portfolio content. The Contact page opens a prefilled draft in the visitor’s email app and also supports downloading a text draft. Sending happens in the email app. Contact details from the supplied reference live in `src/pages/contact/data.ts`.
 
 Shared components live in `src/components`. Fonts are bundled locally. Shared assets belong in `src/assets`, and future generated images belong in `src/assets/images/generated`. Keep matching `<name>-light` and `<name>-dark` assets together and select the appropriate variant using `useTheme`.
 

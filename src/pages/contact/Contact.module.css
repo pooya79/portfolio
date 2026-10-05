@@ -1,0 +1,139 @@
+.page {
+  --contact-bg: #fafbf8;
+  --contact-surface: #fdfefb;
+  --contact-text: #11202a;
+  --contact-muted: #5d686d;
+  --contact-accent: #60752f;
+  --contact-ink: #355447;
+  --contact-tint: #eff4ec;
+  --contact-border: #dfe6dc;
+  background: var(--contact-bg);
+  color: var(--contact-text);
+}
+:global([data-theme='dark']) .page {
+  --contact-bg: #14241d;
+  --contact-surface: #1a2c24;
+  --contact-text: #eaf1e7;
+  --contact-muted: #afbeb4;
+  --contact-accent: #bfd5a6;
+  --contact-ink: #bdd3b4;
+  --contact-tint: #273e30;
+  --contact-border: #3b5142;
+}
+.hero { position: relative; min-height: 340px; overflow: hidden; }
+.heroImage { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 66% 60%; }
+.heroWash { position: absolute; inset: 0; background: linear-gradient(90deg, var(--contact-bg), color-mix(in srgb, var(--contact-bg) 97%, transparent) 23%, color-mix(in srgb, var(--contact-bg) 83%, transparent) 34%, transparent 66%), linear-gradient(0deg, var(--contact-bg), transparent 14%); }
+.heroCopy { position: relative; max-width: 1540px; width: 85.4%; margin: auto; padding: 110px 0 20px; }
+.eyebrow { margin: 0 0 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.8px; color: var(--contact-ink); }
+.hero h1 { font-family: var(--font-body); font-size: clamp(40px, 3.5vw, 58px); font-weight: 500; line-height: 1.04; letter-spacing: -2.6px; }
+.hero h1 span { color: var(--contact-accent); }
+.introduction { max-width: 410px; font-size: 14px; line-height: 1.5; color: var(--contact-muted); margin: 15px 0 0; }
+.introduction strong { color: var(--contact-text); font-weight: 500; }
+.contentGrid { position: relative; width: 94%; max-width: 1540px; margin: auto; padding: 18px 0 32px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .87fr) minmax(0, .95fr); gap: 20px; align-items: stretch; }
+.panel { min-width: 0; padding: 23px; border: 1px solid var(--contact-border); border-radius: 18px; background: var(--contact-surface); }
+.panel h2 { font-family: var(--font-body); font-size: clamp(20px, 1.7vw, 27px); line-height: 1.2; font-weight: 500; letter-spacing: -.9px; }
+.description { margin: 5px 0 18px; font-size: 13px; line-height: 1.45; color: var(--contact-muted); }
+.form { display: grid; gap: 11px; }
+.nameEmail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.field { position: relative; display: flex; align-items: center; border: 1px solid var(--contact-border); border-radius: 10px; background: var(--contact-surface); }
+.field > svg { position: absolute; top: 13px; left: 13px; color: var(--contact-ink); pointer-events: none; }
+.field input, .field textarea { width: 100%; min-width: 0; background: transparent; color: var(--contact-text); border: 0; border-radius: inherit; font-size: 13px; padding: 12px 13px 12px 40px; }
+.field input { height: 44px; }
+.field input::placeholder, .field textarea::placeholder { color: var(--contact-muted); opacity: 1; }
+.field:focus-within { border-color: var(--contact-accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--contact-accent) 18%, transparent); }
+.field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--contact-accent); outline-offset: 2px; }
+.field textarea { resize: vertical; min-height: 116px; padding-bottom: 32px; line-height: 1.5; }
+.counter { position: absolute; bottom: 11px; right: 15px; color: var(--contact-muted); font-size: 11px; font-variant-numeric: tabular-nums; pointer-events: none; }
+.formActions { display: flex; align-items: center; justify-content: space-between; gap: 17px; margin-top: 6px; }
+.sendButton { display: inline-flex; align-items: center; justify-content: center; gap: 22px; padding: 12px 25px; min-height: 48px; background: var(--contact-accent); border: 0; border-radius: 30px; color: var(--button-text); font-size: 15px; white-space: nowrap; }
+.growingNote { display: flex; align-items: center; gap: 11px; color: var(--contact-muted); font-size: 12px; line-height: 1.4; }
+.growingNote svg { flex-shrink: 0; color: var(--contact-ink); }
+.formHelp { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; color: var(--contact-muted); font-size: 11px; }
+.formHelp button { display: inline-flex; align-items: center; gap: 5px; background: transparent; border: 0; padding: 5px 0; color: var(--contact-ink); font-size: inherit; text-decoration: underline; text-underline-offset: 3px; min-height: 28px; }
+.formStatus { margin: 0; color: var(--contact-ink); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.formStatus:empty { display: none; }
+.channels { list-style: none; display: grid; gap: 8px; margin: 0; padding: 0; }
+.channels a, .location { display: flex; align-items: center; gap: 12px; border: 1px solid var(--contact-border); border-radius: 14px; min-height: 58px; padding: 5px 12px 5px 5px; }
+.channelIcon { width: 44px; height: 44px; border-radius: 50%; background: var(--contact-tint); color: var(--contact-ink); flex-shrink: 0; display: grid; place-items: center; }
+.channelCopy { display: grid; gap: 3px; min-width: 0; }
+.channelCopy strong { font-weight: 500; font-size: 14px; line-height: 1.2; }
+.channelCopy > span { font-size: 12px; color: var(--contact-muted); line-height: 1.4; overflow-wrap: anywhere; }
+.channelArrow { margin-left: auto; color: var(--contact-text); flex-shrink: 0; }
+.channels a:hover, .channels a:focus-visible { background: var(--contact-tint); border-color: var(--contact-accent); }
+.connectionNote { display: flex; align-items: center; gap: 16px; border-top: 1px solid var(--contact-border); margin-top: 20px; padding: 16px 5px 0; color: var(--contact-ink); }
+.connectionNote p { margin: 0; font-size: 10px; line-height: 1.9; letter-spacing: 2.5px; text-transform: uppercase; color: var(--contact-muted); }
+.connectionNote svg { flex-shrink: 0; }
+.quotePanel { padding: 16px; }
+.quotePanel figure { margin: 0; }
+.quoteImage { height: 214px; border-radius: 12px; overflow: hidden; background: var(--contact-tint); }
+.quoteImage img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 83% 50%; }
+.quotePanel blockquote { margin: 20px 6px 13px; padding-bottom: 3px; font: italic clamp(21px, 1.65vw, 27px)/1.35 Georgia, serif; color: var(--contact-muted); }
+.quotePanel figcaption { display: flex; align-items: center; gap: 10px; margin: 0 6px; font-size: 13px; color: var(--contact-muted); }
+.quotePanel figcaption::before { content: ''; width: 16px; height: 1px; background: var(--contact-muted); }
+.srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .sendButton { transition: transform 200ms, filter 200ms; }
+  .sendButton svg, .channelArrow, .quoteImage img { transition: transform 300ms ease; }
+  .sendButton:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .sendButton:active { transform: translateY(0); }
+  .sendButton:hover svg, .sendButton:focus-visible svg, .channels a:hover .channelArrow, .channels a:focus-visible .channelArrow { transform: translateX(4px); }
+  .quotePanel:hover .quoteImage img { transform: scale(1.04); }
+}
+@media (min-width: 1600px) { .hero { min-height: 365px; } .introduction { max-width: 455px; font-size: 15px; } .quoteImage { height: 228px; } .panel { padding: 24px; } .quotePanel { padding: 17px; } }
+@media (max-width: 1350px) {
+  .contentGrid { gap: 15px; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) minmax(0, .85fr); }
+  .panel { padding: 18px; }
+  .quotePanel { padding: 13px; }
+  .growingNote { font-size: 11px; gap: 7px; }
+  .growingNote svg { width: 25px; }
+  .sendButton { padding-inline: 20px; gap: 12px; }
+  .channels a, .location { gap: 9px; }
+  .channelIcon { width: 37px; height: 37px; }
+  .channelCopy > span { font-size: 11px; }
+}
+@media (max-width: 1100px) {
+  .heroCopy { width: 90%; }
+  .contentGrid { width: 90%; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; }
+  .quotePanel { grid-column: 1 / -1; }
+  .quotePanel figure { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr auto; column-gap: 24px; }
+  .quoteImage { grid-row: 1 / 3; height: 160px; }
+  .quotePanel blockquote { align-self: end; margin-top: 0; }
+  .quotePanel figcaption { margin-bottom: 28px; }
+}
+@media (max-width: 800px) {
+  .heroCopy { padding-top: 156px; padding-bottom: 30px; width: 88%; }
+  .hero h1 { font-size: 44px; letter-spacing: -1.8px; }
+  .heroWash { background: linear-gradient(90deg, var(--contact-bg), color-mix(in srgb, var(--contact-bg) 96%, transparent) 35%, color-mix(in srgb, var(--contact-bg) 60%, transparent) 65%, transparent), linear-gradient(0deg, var(--contact-bg), transparent 20%); }
+  .contentGrid { grid-template-columns: minmax(0, 1fr); width: 90%; padding-top: 14px; gap: 16px; }
+  .panel { padding: 23px; }
+  .panel h2 { font-size: 25px; }
+  .description { font-size: 14px; }
+  .channelCopy > span { font-size: 13px; }
+  .channelIcon { width: 44px; height: 44px; }
+  .channels a, .location { min-height: 62px; gap: 14px; }
+  .quotePanel { grid-column: auto; }
+  .growingNote { font-size: 12px; }
+}
+@media (max-width: 540px) {
+  .heroCopy { padding-top: 150px; padding-bottom: 130px; }
+  .hero h1 { font-size: clamp(31px, 7.8vw, 42px); letter-spacing: -1.6px; }
+  .introduction { font-size: 13px; max-width: 360px; margin-top: 13px; }
+  .heroImage { inset: auto 0 0; height: 125px; object-position: 77% 66%; }
+  .heroWash { background: linear-gradient(180deg, var(--contact-bg) calc(100% - 125px), color-mix(in srgb, var(--contact-bg) 20%, transparent) calc(100% - 100px), transparent calc(100% - 75px)); }
+  .contentGrid { width: 91%; padding-top: 12px; }
+  .panel { padding: 19px 16px; border-radius: 15px; }
+  .panel h2 { font-size: 23px; }
+  .description { font-size: 13px; }
+  .nameEmail { grid-template-columns: minmax(0, 1fr); gap: 11px; }
+  .field input, .field textarea { font-size: 16px; }
+  .field textarea { min-height: 136px; }
+  .formActions { gap: 12px; }
+  .sendButton { padding-inline: 18px; font-size: 14px; gap: 12px; }
+  .growingNote { font-size: 10px; gap: 6px; }
+  .growingNote svg { width: 21px; }
+  .quotePanel { padding: 14px; }
+  .quotePanel figure { display: block; }
+  .quoteImage { height: 155px; }
+  .quotePanel blockquote { font-size: 25px; margin: 18px 6px 12px; }
+  .quotePanel figcaption { margin-bottom: 10px; }
+}

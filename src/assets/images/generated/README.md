@@ -37,3 +37,23 @@ The other thumbnails reuse the existing paired landscape and workshop assets. Al
 
 - Day (precise-object-edit): create only the clean environmental raster art from the supplied About reference. Remove navigation, About text, quote, building lettering, and lower content cards. Reconstruct and extend the upper solarpunk city to a wide landscape canvas. Match lush optimistic architectural style: ivory organic terraces over a serene river, planted balconies, glass geodesic botanical dome at center right, alpine mountains, blue sky, warm daylight, green gardens, and soft blurred corner leaves. Keep the city strongest across center and right and important subjects in the center vertical region for a short panoramic banner. No baked-in white wash, text, UI, watermarks, or portraits.
 - Night (lighting-weather): edit the clean day asset, changing only lighting, sky, and atmosphere. Preserve canvas dimensions, framing, architecture, glass dome, mountains, river, foliage, and camera perspective. Use deep navy sky with delicate stars, cool mountain light, warm building windows and dome interior, subtle amber garden lights, and river reflections. Keep greenery visible and natural detail readable. No new buildings, neon, text, UI, or watermarks.
+
+## Contact page terrace
+
+The Contact page follows the supplied form, connection links, and quote layout, with a shorter 340px desktop hero (365px on wide screens) and a 125px mobile image. It keeps the existing navigation, locally bundled DM Sans / Outfit typography, olive accent, CSS Modules, and shared theme. Design variance 6, motion intensity 5, visual density 4. Staggered reveals establish the reading order; button arrows, link feedback, and a subtle quote-image hover acknowledge interaction. Reduced motion disables movement.
+
+Generated using the built-in ImageGen tool. Day and night are stored together as 2172 × 724 WebP assets, with 1086 × 362 responsive copies. The night output was one pixel narrower and normalized to the day dimensions during encoding. The hero and quote image both select the corresponding theme through `src/pages/contact/sceneAssets.ts`.
+
+| Asset | Day | Night |
+| --- | --- | --- |
+| Panorama | `contact-terrace-light.webp` | `contact-terrace-dark.webp` |
+| Responsive panorama / quote | `contact-terrace-small-light.webp` | `contact-terrace-small-dark.webp` |
+
+### Contact prompt set
+
+- Day (stylized-concept): use the supplied Contact screenshot as a style reference for a new clean 3:1 environmental panorama. Replace the tall pavilion with a low gently curving pergola on the right, hanging vines, planted terraces, curved ivory seats, low round table and laptop. Overlook a serene lake, alpine mountains, sustainable organic city, and subtle rooftop solar panels. Pale blue sky, warm sun, natural greenery, open left third for live HTML copy. Keep key subjects in the middle vertical band for a shallow banner. No holographic globe, tall foreground columns, people, text, UI, logo, watermarks, or baked-in white overlays.
+- Night (lighting-weather): edit the day artwork, changing only lighting, sky and atmosphere. Preserve the canvas ratio, camera, architecture, plants, lake, mountains, city, solar panels, pergola, seating, laptop, table, and subject positions. Deep blue moonlit sky with subtle stars, cool readable mountains, warm garden and pergola light, softly illuminated windows and lake reflections, visible natural greenery. No new objects, people, text, UI, watermarks, neon or cyberpunk.
+
+### Visual analysis and integration
+
+The panorama has a low horizontal terrace silhouette, with the seating and vine-covered pergola across the right half and open sky and lake on the left. A soft theme-colored HTML wash creates contrast for the two-line 40–58px headline and 14px introduction. Beneath it, unequal columns give the form the most space, followed by contact channels and a shorter cropped view of the same themed artwork above a Georgia italic quote. Light panels use fine green-gray borders, 10px input corners, 18px panel corners, and pill-shaped olive actions; night tokens retain the same hierarchy. All interface text and controls are HTML.
