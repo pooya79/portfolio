@@ -1,0 +1,24 @@
+.art { position: relative; min-height: 230px; overflow: hidden; background: var(--art-bg); color: var(--art-ink); isolation: isolate; }
+.orbit { position: absolute; width: 300px; height: 300px; border: 1px solid var(--art-line); border-radius: 50%; left: 50%; top: 48%; transform: translate(-50%, -50%); }
+.orbit::after { content: ''; position: absolute; inset: 25px; border: 1px solid var(--art-line); border-radius: 50%; }
+.horizon { position: absolute; inset: auto -10% -72px; height: 140px; border-radius: 50%; background: var(--art-ground); }
+.arch { position: absolute; width: 135px; height: 180px; left: 50%; bottom: 25px; transform: translateX(-50%); border: 1px solid var(--art-ink); border-radius: 100px 100px 3px 3px; background: var(--art-glass); }
+.arch::after { content: ''; position: absolute; top: 68px; left: 0; right: 0; height: 1px; background: var(--art-line); }
+.archLine { position: absolute; inset: 0; width: 1px; background: var(--art-line); margin: auto; }
+.plant { position: absolute; width: 110px; height: 110px; bottom: 0; left: 12px; }
+.sun { position: absolute; width: 47px; height: 47px; top: 26px; right: 20%; color: var(--art-sun); }
+.leafLeft { width: 90px; height: 90px; position: absolute; bottom: 11px; left: 15%; transform: rotate(-33deg); }
+.leafRight { width: 78px; height: 78px; position: absolute; bottom: 17px; right: 15%; transform: rotate(34deg); }
+.wind { position: absolute; width: 55px; height: 55px; left: 17%; top: 30px; color: var(--art-line); }
+.compact { min-height: 175px; }
+.compact .arch { height: 132px; width: 106px; bottom: 12px; }
+.compact .plant { width: 82px; height: 82px; }
+.compact .leafLeft, .compact .leafRight { width: 60px; height: 60px; }
+.sunStudy { background: var(--sun-study-bg); }
+.sunStudy .sun { width: 90px; height: 90px; top: 20px; right: 18%; }
+@media (prefers-reduced-motion: no-preference) {
+  .art .leafLeft, .art .leafRight, .art .plant { transition: transform 650ms ease; }
+  .art:hover .leafLeft { transform: rotate(-20deg) translateY(-4px); }
+  .art:hover .leafRight { transform: rotate(20deg) translateY(-4px); }
+  .art:hover .plant { transform: translateY(-3px); }
+}

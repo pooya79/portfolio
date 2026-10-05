@@ -1,0 +1,17 @@
+.garden { height: 100%; background: var(--garden-bg); padding: 25px; border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--accent); }
+.header h2 { font-size: 22px; color: var(--text); }
+.garden > p { color: var(--muted); font-size: 12px; margin: 7px 0 0; }
+.bed { position: relative; display: flex; align-items: flex-end; justify-content: center; flex: 1; min-height: 160px; padding-bottom: 12px; margin-top: 5px; }
+.plant { color: var(--accent); transform-origin: center 92%; margin-inline: -10px; }
+.plant:nth-child(2) { color: var(--art-ink); }
+.ground { position: absolute; bottom: 16px; left: 12%; right: 12%; height: 1px; background: var(--art-line); }
+.controls { margin-top: 15px; }
+.rangeLabel { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 11px; }
+.rangeLabel span { color: var(--muted); }
+.controls input { width: 100%; accent-color: var(--accent); margin: 12px 0 15px; height: 18px; }
+.actions { display: flex; gap: 10px; }
+.actions button { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 9px 11px; display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 11px; min-height: 38px; }
+.actions button:first-child { flex: 1; }
+.actions button:hover { border-color: var(--accent); }
+.reset { width: 38px; }
