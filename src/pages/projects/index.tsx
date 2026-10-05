@@ -1,26 +1,89 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { Link } from 'react-router'
-import { ArrowUpRightIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
-import { PageHeading } from '../../components/PageHeading'
+import { motion, useReducedMotion } from 'motion/react'
+import { ArrowUpRightIcon, BookOpenIcon, CodeIcon, GlobeHemisphereWestIcon, InfinityIcon, PlantIcon, UsersThreeIcon } from '@phosphor-icons/react'
 import { Reveal } from '../../components/Reveal'
-import { BotanicalArt } from '../../components/BotanicalArt'
-import { projects } from './data'
-import styles from '../../components/Content.module.css'
+import { useTheme } from '../../theme/theme'
+import { projectCollection } from './data'
+import { projectImages, projectImageSources } from './sceneAssets'
+import type { ProjectFilter } from './types'
+import styles from './Projects.module.css'
+
+const filters: ProjectFilter[] = ['All', 'AI', 'Research', 'Backend', 'Products']
 
 export default function Projects() {
-  const [filter, setFilter] = useState('All')
-  const [search, setSearch] = useState('')
-  const filtered = projects.filter(project => (filter === 'All' || project.category === filter) && `${project.title} ${project.description}`.toLowerCase().includes(search.toLowerCase()))
-  return <>
-    <PageHeading title="Things taking shape." description="A space for projects and experiments. These sample entries show how your future work will live here." />
-    <div className={styles.toolbar}>
-      <div className={styles.filters} role="group" aria-label="Filter projects">{['All', 'Interface', 'Experiment'].map(category => <button key={category} aria-pressed={category === filter} onClick={() => setFilter(category)}>{category}</button>)}</div>
-      <label className={styles.search}><MagnifyingGlassIcon size={18} /><span className={styles.srOnly}>Search projects</span><input type="search" placeholder="Find a project…" value={search} onChange={event => setSearch(event.target.value)} /></label>
-    </div>
-    <p className={styles.resultCount} role="status">{filtered.length} {filtered.length === 1 ? 'project' : 'projects'}</p>
-    <div className={styles.projectGrid}>{filtered.map((project, index) => <Reveal key={project.slug} delay={index * 0.06}>
-      <Link to={`/projects/${project.slug}`} className={styles.projectCard}><BotanicalArt motif={project.motif} /><div className={styles.cardCopy}><span className={styles.meta}>{project.category} / Sample project</span><h2>{project.title}<ArrowUpRightIcon size={23} /></h2><p>{project.description}</p></div></Link>
-    </Reveal>)}</div>
-    {filtered.length === 0 && <div className={styles.empty}><h2>No projects on this path.</h2><p>Try another search or browse the full collection.</p><button className="button button-secondary" onClick={() => { setFilter('All'); setSearch('') }}>Show all projects</button></div>}
-  </>
+  const { theme } = useTheme()
+  const reduced = useReducedMotion()
+  const [filter, setFilter] = useState<ProjectFilter>('All')
+  const [sort, setSort] = useState('featured')
+  const filtered = projectCollection.filter(project => filter === 'All' || project.filters.includes(filter))
+  const visible = sort === 'alphabetical' ? [...filtered].sort((a, b) => a.title.localeCompare(b.title)) : filtered
+  const researchCount = projectCollection.filter(project => project.filters.includes('Research')).length
+
+  return <div className={styles.page}>
+    <section className={styles.hero} aria-labelledby="projects-title">
+      <img className={styles.heroImage} src={projectImages.workshop[theme]} srcSet={projectImageSources('workshop', theme)} sizes="100vw" width={1672} height={941} alt="A lush solarpunk invention studio with a laptop, robot prototype, solar sensor, and green housing model." fetchPriority="high" />
+      <div className={styles.heroWash} />
+      <div className={styles.heroInner}>
+        <Reveal className={styles.heroCopy}>
+          <p className={styles.eyebrow}>Building a brighter tomorrow</p>
+          <h1 id="projects-title">Projects</h1>
+          <p className={styles.subtitle}>AI systems, research, and products<br className={styles.desktopBreak} /> for a more livable tomorrow.</p>
+          <p className={styles.description}>A collection of my projects spanning AI, applied research, and real-world products. Each project is a step toward smarter tools and a brighter future.</p>
+        </Reveal>
+        <Reveal className={styles.principles} delay={0.15}>
+          <ul>
+            <li><PlantIcon size={27} weight="duotone" /><span>Build<br />Useful Technology</span></li>
+            <li><UsersThreeIcon size={27} /><span>Advance<br />Open Research</span></li>
+            <li><GlobeHemisphereWestIcon size={27} /><span>Create<br />Positive Real-World Impact</span></li>
+          </ul>
+          <blockquote>“A brighter tomorrow<br />is a project we can build together.”</blockquote>
+        </Reveal>
+      </div>
+    </section>
+    <section className={styles.collection} aria-label="Project collection">
+      <div className={styles.toolbar}>
+        <div className={styles.filters} role="group" aria-label="Filter projects">
+          {filters.map(category => <button key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>
+            {filter === category && <motion.span className={styles.filterIndicator} layoutId="project-filter" transition={{ duration: reduced ? 0 : 0.25 }} />}
+            <span>{category}</span>
+          </button>)}
+        </div>
+        <div className={styles.collectionControls}>
+          <p className={styles.count} role="status" aria-live="polite">{visible.length} {visible.length === 1 ? 'project' : 'projects'}</p>
+          <label className={styles.sort}>Sort by <select aria-label="Sort projects" value={sort} onChange={event => setSort(event.target.value)}><option value="featured">Featured</option><option value="alphabetical">Name A–Z</option></select></label>
+        </div>
+      </div>
+      <div className={styles.collectionBody}>
+        <div className={styles.projectGrid}>
+          {visible.map(project => <motion.article key={project.slug} layout={!reduced} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
+            <Link to={`/projects/${project.slug}`} className={styles.projectCard}>
+              <div className={styles.cardImage}>
+                <img src={projectImages[project.image][theme]} srcSet={projectImageSources(project.image, theme)} sizes="(max-width: 540px) 170vw, (max-width: 800px) 80vw, 50vw" width={1672} height={941} style={{ objectPosition: project.imagePosition, transformOrigin: project.imagePosition, '--image-scale': project.imageScale ?? 1 } as CSSProperties} alt="" loading="lazy" />
+                <span className={styles.projectNumber}>{String(projectCollection.indexOf(project) + 1).padStart(2, '0')}</span>
+              </div>
+              <div className={styles.cardCopy}>
+                <h2>{project.title}</h2>
+                <p>{project.description}</p>
+                <span className={styles.cardArrow} aria-hidden="true"><ArrowUpRightIcon size={21} /></span>
+                <ul className={styles.tags} aria-label="Project topics">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+              </div>
+            </Link>
+          </motion.article>)}
+        </div>
+        <Reveal className={styles.sidebar} delay={0.2}>
+          <h2>Turning ideas<br />into a brighter<br />tomorrow.</h2>
+          <div className={styles.shortRule} />
+          <p>I work at the intersection of AI, research, and real-world products to create a cleaner, more livable, and more human future.</p>
+          <ul className={styles.stats} aria-label="Portfolio at a glance">
+            <li><CodeIcon size={28} /><span>{projectCollection.length}</span><p>Projects</p></li>
+            <li><BookOpenIcon size={28} /><span>{researchCount}</span><p>Research Projects</p></li>
+            <li><InfinityIcon size={28} /><span>∞</span><p>Ideas Ahead</p></li>
+          </ul>
+          <blockquote>“Cleaner cities. Smarter tools.<br />A brighter tomorrow.”</blockquote>
+          <div className={styles.signature}><PlantIcon size={24} weight="duotone" /><span>Pouya Fallah</span></div>
+        </Reveal>
+      </div>
+    </section>
+  </div>
 }

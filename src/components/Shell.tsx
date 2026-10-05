@@ -16,7 +16,8 @@ export function Shell({ children }: { children: ReactNode }) {
   const { theme, setTheme } = useTheme()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
-  return <div className={`${styles.shell} ${isHome ? styles.home : ''}`}>
+  const isProjects = pathname === '/projects'
+  return <div className={`${styles.shell} ${isHome ? styles.home : ''} ${isProjects ? styles.projects : ''}`}>
     <a className="skip-link" href="#main-content" onClick={event => { event.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
     <header className={styles.header}>
       <Link to="/" className={styles.brand}>

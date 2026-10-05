@@ -7,6 +7,8 @@
     <link rel="preload" href="/node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/src/assets/images/generated/solarpunk-landscape-light.webp" as="image" fetchpriority="high" media="not all" data-scene-theme="light" />
     <link rel="preload" href="/src/assets/images/generated/solarpunk-landscape-dark.webp" as="image" fetchpriority="high" media="not all" data-scene-theme="dark" />
+    <link rel="preload" href="/src/assets/images/generated/projects-workshop-light.webp" imagesrcset="/src/assets/images/generated/projects-workshop-small-light.webp 836w, /src/assets/images/generated/projects-workshop-light.webp 1672w" imagesizes="100vw" as="image" fetchpriority="high" media="not all" data-project-theme="light" />
+    <link rel="preload" href="/src/assets/images/generated/projects-workshop-dark.webp" imagesrcset="/src/assets/images/generated/projects-workshop-small-dark.webp 836w, /src/assets/images/generated/projects-workshop-dark.webp 1672w" imagesizes="100vw" as="image" fetchpriority="high" media="not all" data-project-theme="dark" />
     <meta name="theme-color" content="#f5f7f0" />
     <meta name="description" content="Pouya Fallah's solarpunk portfolio. AI systems, research, and scalable infrastructure for a brighter tomorrow." />
     <title>Pouya Fallah | Home</title>
@@ -21,6 +23,11 @@
       if (['', '#', '#/'].includes(location.hash)) {
         document.querySelectorAll('[data-scene-theme]').forEach(link => {
           link.media = link.dataset.sceneTheme === document.documentElement.dataset.theme ? 'all' : 'not all';
+        });
+      }
+      if (location.hash === '#/projects' || location.hash === '#/projects/') {
+        document.querySelectorAll('[data-project-theme]').forEach(link => {
+          link.media = link.dataset.projectTheme === document.documentElement.dataset.theme ? 'all' : 'not all';
         });
       }
     </script>

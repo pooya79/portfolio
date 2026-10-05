@@ -2,9 +2,9 @@ import { lazy, Suspense, useEffect, useRef } from 'react'
 import { Routes, Route, useLocation, Link } from 'react-router'
 import { motion, useReducedMotion } from 'motion/react'
 import { Shell } from './components/Shell'
+import Projects from './pages/projects'
 import Home from './pages/home'
 
-const Projects = lazy(() => import('./pages/projects'))
 const ProjectDetail = lazy(() => import('./pages/projects/ProjectDetail'))
 const Blogs = lazy(() => import('./pages/blogs'))
 const BlogDetail = lazy(() => import('./pages/blogs/BlogDetail'))
