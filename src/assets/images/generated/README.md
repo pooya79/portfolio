@@ -19,3 +19,21 @@ The design follows the supplied reference: a full-bleed cinematic scene, a left-
 ## Integration
 
 `src/pages/home/sceneAssets.ts` selects both landscape and foreground by the shared theme. The lake uses a softly masked duplicate of the landscape, so no extra generated assets are required. The project thumbnail uses that same themed landscape. Motion values handle scene depth, and CSS handles ambient lake movement and particles. Reduced motion and Pause motion stop the scene.
+
+## About page garden city
+
+The About page uses a compact panorama above the journey, education, tech stack, philosophy, and interests. It preserves the shared navigation, DM Sans / Outfit typography, and green palette. Native CSS implements the supplied aesthetic; design variance 6, motion intensity 5, visual density 5. Reveal animations establish content hierarchy; image and icon hover motion provides feedback. Reduced motion is respected.
+
+Generated with the built-in ImageGen tool using the supplied About-page reference. Day and night preserve the same 1660 × 948 composition. WebP encoding and smaller 830 × 474 responsive copies reduce transfer size without altering the artwork. All versions switch with the shared theme in `src/pages/about/sceneAssets.ts`.
+
+| Asset | Day | Night |
+| --- | --- | --- |
+| Hero | `about-garden-light.webp` | `about-garden-dark.webp` |
+| Responsive hero and thumbnails | `about-garden-small-light.webp` | `about-garden-small-dark.webp` |
+
+The other thumbnails reuse the existing paired landscape and workshop assets. All biography, dates, education, and skills are mock content in `src/pages/about/data.ts`.
+
+### About prompt set
+
+- Day (precise-object-edit): create only the clean environmental raster art from the supplied About reference. Remove navigation, About text, quote, building lettering, and lower content cards. Reconstruct and extend the upper solarpunk city to a wide landscape canvas. Match lush optimistic architectural style: ivory organic terraces over a serene river, planted balconies, glass geodesic botanical dome at center right, alpine mountains, blue sky, warm daylight, green gardens, and soft blurred corner leaves. Keep the city strongest across center and right and important subjects in the center vertical region for a short panoramic banner. No baked-in white wash, text, UI, watermarks, or portraits.
+- Night (lighting-weather): edit the clean day asset, changing only lighting, sky, and atmosphere. Preserve canvas dimensions, framing, architecture, glass dome, mountains, river, foliage, and camera perspective. Use deep navy sky with delicate stars, cool mountain light, warm building windows and dome interior, subtle amber garden lights, and river reflections. Keep greenery visible and natural detail readable. No new buildings, neon, text, UI, or watermarks.

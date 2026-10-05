@@ -10,6 +10,8 @@
     <link rel="preload" href="/src/assets/images/generated/projects-workshop-light.webp" imagesrcset="/src/assets/images/generated/projects-workshop-small-light.webp 836w, /src/assets/images/generated/projects-workshop-light.webp 1672w" imagesizes="100vw" as="image" fetchpriority="high" media="not all" data-project-theme="light" />
     <link rel="preload" href="/src/assets/images/generated/projects-workshop-dark.webp" imagesrcset="/src/assets/images/generated/projects-workshop-small-dark.webp 836w, /src/assets/images/generated/projects-workshop-dark.webp 1672w" imagesizes="100vw" as="image" fetchpriority="high" media="not all" data-project-theme="dark" />
     <meta name="theme-color" content="#f5f7f0" />
+    <link rel="preload" href="/src/assets/images/generated/about-garden-light.webp" imagesrcset="/src/assets/images/generated/about-garden-small-light.webp 830w, /src/assets/images/generated/about-garden-light.webp 1660w" imagesizes="100vw" as="image" fetchpriority="high" media="not all" data-about-theme="light" />
+    <link rel="preload" href="/src/assets/images/generated/about-garden-dark.webp" imagesrcset="/src/assets/images/generated/about-garden-small-dark.webp 830w, /src/assets/images/generated/about-garden-dark.webp 1660w" imagesizes="100vw" as="image" fetchpriority="high" media="not all" data-about-theme="dark" />
     <meta name="description" content="Pouya Fallah's solarpunk portfolio. AI systems, research, and scalable infrastructure for a brighter tomorrow." />
     <title>Pouya Fallah | Home</title>
     <script>
@@ -28,6 +30,11 @@
       if (location.hash === '#/projects' || location.hash === '#/projects/') {
         document.querySelectorAll('[data-project-theme]').forEach(link => {
           link.media = link.dataset.projectTheme === document.documentElement.dataset.theme ? 'all' : 'not all';
+        });
+      }
+      if (location.hash === '#/about' || location.hash === '#/about/') {
+        document.querySelectorAll('[data-about-theme]').forEach(link => {
+          link.media = link.dataset.aboutTheme === document.documentElement.dataset.theme ? 'all' : 'not all';
         });
       }
     </script>

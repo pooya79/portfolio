@@ -27,7 +27,9 @@ export default function App() {
 
   return <Shell>
     <motion.div key={pathname} initial={reduced || pathname === '/' ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
-      <Suspense fallback={<p role="status">Opening this corner of the garden…</p>}>
+      <Suspense fallback={pathname === '/about'
+        ? <div className="about-loading"><p role="status">Opening this corner of the garden…</p></div>
+        : <p role="status">Opening this corner of the garden…</p>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
