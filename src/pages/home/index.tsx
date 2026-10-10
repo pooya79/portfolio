@@ -29,7 +29,7 @@ export default function Home() {
     <div className={styles.composition}>
       <motion.div className={styles.heroCopy} initial={reduced ? false : { y: 18 }} animate={{ y: 0 }} transition={{ duration: .65 }}>
         <h1 id="hero-title">Building<br /><span>brighter</span><br />tomorrows.</h1>
-        <p>I’m <strong>Pouya Fallah</strong>. I build AI systems, contribute to research, and design scalable backend infrastructure to help create a more open, intelligent, and hopeful future.</p>
+        <p>I’m <strong>Pouya Fallah</strong>. I build and ship AI-powered products using modern software engineering and AI-native development workflows.</p>
         <Link className={styles.explore} to="/projects">EXPLORE MY WORK <ArrowRightIcon size={25} /></Link>
       </motion.div>
       <motion.aside className={styles.featured} aria-label="Featured projects" initial={reduced ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .4 }}>

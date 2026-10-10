@@ -16,7 +16,7 @@ export default function App() {
   const reduced = useReducedMotion()
   const previousPath = useRef(pathname)
   useEffect(() => {
-    const name = pathname === '/' ? 'Home' : pathname.split('/').filter(Boolean).map(part => part.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')).join(' | ')
+    const name = pathname === '/' ? 'AI Product Engineer' : pathname.split('/').filter(Boolean).map(part => part.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')).join(' | ')
     document.title = `Pouya Fallah | ${name}`
     if (previousPath.current !== pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })

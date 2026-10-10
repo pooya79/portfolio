@@ -51,8 +51,8 @@ export default function Contact() {
       <div className={styles.heroWash} />
       <Reveal className={styles.heroCopy}>
         <p className={styles.eyebrow}>Get in touch</p>
-        <h1 id="contact-title">Let’s build<br /><span>brighter tomorrows.</span></h1>
-        <p className={styles.introduction}><strong>I’m Pouya Fallah.</strong> Let’s talk about AI systems, backend engineering, research, or your next idea. I’d love to hear from you.</p>
+        <h1 id="contact-title">Let’s make<br /><span>something useful.</span></h1>
+        <p className={styles.introduction}>Let’s talk about AI systems, backend engineering, research, or your next idea. I’d love to hear from you.</p>
       </Reveal>
     </section>
 
@@ -87,7 +87,7 @@ export default function Contact() {
             </div>
             <div className={styles.formActions}>
               <button type="submit" className={styles.sendButton}>Send Message <ArrowRightIcon size={24} aria-hidden="true" /></button>
-              <div className={styles.growingNote}><PlantIcon size={30} weight="duotone" aria-hidden="true" /><span>Thoughtful conversations<br />lead to brighter places.</span></div>
+              <div className={styles.growingNote}><PlantIcon size={30} weight="duotone" aria-hidden="true" /><span>Every collaboration<br />starts with a conversation.</span></div>
             </div>
             <div className={styles.formHelp}>
               <span>Opens a draft in your email app.</span>
@@ -115,7 +115,7 @@ export default function Contact() {
               <span className={styles.channelCopy}><strong>Location</strong><span>{contactDetails.location}</span></span>
             </li>
           </ul>
-          <div className={styles.connectionNote}><PlantIcon size={34} weight="duotone" aria-hidden="true" /><p>Different places<br />a brighter tomorrow</p></div>
+          <div className={styles.connectionNote}><PlantIcon size={34} weight="duotone" aria-hidden="true" /><p>Different places.<br />Shared curiosity.</p></div>
         </section>
       </Reveal>
 

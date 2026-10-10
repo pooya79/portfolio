@@ -26,9 +26,9 @@ export default function Projects() {
       <div className={styles.heroWash} />
       <div className={styles.heroInner}>
         <Reveal className={styles.heroCopy}>
-          <p className={styles.eyebrow}>Building a brighter tomorrow</p>
+          <p className={styles.eyebrow}>From exploration to implementation</p>
           <h1 id="projects-title">Projects</h1>
-          <p className={styles.subtitle}>AI systems, research, and products<br className={styles.desktopBreak} /> for a more livable tomorrow.</p>
+          <p className={styles.subtitle}>AI systems, research, and products.<br className={styles.desktopBreak} /> The ideas, decisions, and code behind them.</p>
         </Reveal>
         <Reveal className={styles.principles} delay={0.15}>
           <ul>
@@ -70,9 +70,9 @@ export default function Projects() {
           </motion.article>)}
         </div>
         <Reveal className={styles.sidebar} delay={0.2}>
-          <h2>Turning ideas<br />into a brighter<br />tomorrow.</h2>
+          <h2>From ideas<br />to working<br />products.</h2>
           <div className={styles.shortRule} />
-          <p>I work at the intersection of AI, research, and real-world products to create a cleaner, more livable, and more human future.</p>
+          <p>I connect AI research with software engineering, working through the practical details that turn a promising idea into a useful product.</p>
           <ul className={styles.stats} aria-label="Portfolio at a glance">
             <li><CodeIcon size={28} /><span>{projectCollection.length}</span><p>Projects</p></li>
             <li><BookOpenIcon size={28} /><span>{researchCount}</span><p>Research Projects</p></li>

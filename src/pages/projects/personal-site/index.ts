@@ -2,7 +2,7 @@ import type { ShowcaseProject } from '../types'
 
 export const personalSite: ShowcaseProject = {
   slug: 'personal-site', title: 'Personal Site',
-  description: 'This very website, built with a vision for a brighter tomorrow.',
+  description: 'A solarpunk portfolio with day and night themes, built in React.',
   category: 'Product', motif: 'leaf', tags: ['Product', 'Design', 'Web'],
   filters: ['Products'], image: 'workshop', imagePosition: '50% 60%', imageScale: 1.65,
   introduction: 'A personal portfolio built as a static React website, with a solarpunk visual identity and an atmosphere that changes from day to night.',

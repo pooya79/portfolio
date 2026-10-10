@@ -28,13 +28,13 @@ export function Shell({ children }: { children: ReactNode }) {
     <header className={styles.header} style={{ '--navigation-symbols': `url("${theme === 'light' ? symbolsLight : symbolsDark}")` } as CSSProperties}>
       <Link to="/" className={styles.brand}>
         <span className={styles.brandMark} aria-hidden="true" />
-        <span className={styles.wordmark}>Pouya Fallah<small>AI SYSTEMS ENGINEERING</small></span>
+        <span className={styles.wordmark}>Pouya Fallah<small>AI PRODUCT ENGINEER</small></span>
       </Link>
       <nav aria-label="Main navigation" className={styles.nav}>
         {navigation.map(({ path, label }) => <NavLink key={path} to={path} end={path === '/'} className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>{label}</NavLink>)}
       </nav>
       <div className={styles.actions}>
-        <p className={styles.tagline}>TECHNOLOGY × HUMANITY<br />A BRIGHTER TOMORROW</p>
+        <p className={styles.tagline}>IDEAS INTO PRODUCTS<br />BUILT WITH PURPOSE</p>
         <button className={styles.themeButton} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={theme === 'light' ? 'Switch to night' : 'Switch to day'} title={theme === 'light' ? 'Switch to night' : 'Switch to day'}>
           <span key={theme} className={`${styles.themeSymbol} ${theme === 'light' ? styles.sun : styles.moon}`} aria-hidden="true" />
         </button>
@@ -43,6 +43,6 @@ export function Shell({ children }: { children: ReactNode }) {
     </header>
     {!isHome && <EdgeFoliage />}
     <main id="main-content" tabIndex={-1} className={styles.main}>{children}</main>
-    {!isHome && <footer className={styles.footer}><span>Pouya Fallah</span><span>Technology and humanity. A brighter tomorrow.</span></footer>}
+    {!isHome && <footer className={styles.footer}><span>Pouya Fallah</span><span>Thoughtful engineering. Useful products.</span></footer>}
   </div>
 }
