@@ -3,7 +3,9 @@ export const biography = {
   eyebrow: 'People · Technology · A brighter tomorrow',
   subtitle: 'Growing ideas, systems, and research for a brighter tomorrow.',
   introduction: 'I’m Pouya Fallah, an AI systems engineer, researcher, and builder, passionate about using technology to solve real-world problems and create cleaner, smarter, and more humane futures.',
-  quote: 'Better systems for a kinder, brighter tomorrow.',
+  quote: 'When we try to pick out anything by itself, we find it hitched to everything else in the Universe.',
+  quoteAuthor: 'John Muir',
+  quoteSource: 'https://www.nps.gov/articles/what-s-the-buzz-how-bees-interrelate-with-birds-wildflowers-and-deer.htm',
 }
 export const journey = [
   { period: '2020 - 2021', title: 'Backend Engineer', description: 'Started my journey building scalable web services and APIs, learning how reliable systems power real impact.', icon: 'code', image: 'garden', position: '70% 65%' },

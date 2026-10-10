@@ -33,7 +33,10 @@ export default function About() {
         </Reveal>
         <Reveal className={styles.quote} delay={0.15}>
           <PlantIcon size={32} weight="duotone" aria-hidden="true" />
-          <blockquote><p>“{biography.quote}”</p><cite>Pouya Fallah</cite></blockquote>
+          <figure>
+            <blockquote cite={biography.quoteSource}><p>“{biography.quote}”</p></blockquote>
+            <figcaption>{biography.quoteAuthor}</figcaption>
+          </figure>
         </Reveal>
       </div>
     </section>
@@ -97,7 +100,6 @@ export default function About() {
               const ItemIcon = icons[item.icon]
               return <li key={item.label}><ItemIcon size={25} aria-hidden="true" /><span>{item.label}</span></li>
             })}</ul>
-            <p className={styles.closingQuote}>“Clearer minds. Brighter ideas. A kinder tomorrow.”</p>
           </section>
         </Reveal>
       </div>

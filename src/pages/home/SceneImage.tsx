@@ -133,7 +133,7 @@ export function SceneImage({ src, foreground = false, paused, reduced }: {
       target.height = Math.max(1, Math.round(rect.height * ratio))
       gl.viewport(0, 0, target.width, target.height)
       gl.uniform2f(frameUniform, target.width, target.height)
-      gl.uniform1f(anchorUniform, window.innerWidth <= 800 ? (foreground ? .17 : .44) : .5)
+      gl.uniform1f(anchorUniform, foreground ? 0 : (window.innerWidth <= 800 ? .44 : .5))
       draw()
     }
     const image = new Image()

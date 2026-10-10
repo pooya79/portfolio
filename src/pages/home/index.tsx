@@ -22,6 +22,10 @@ export default function Home() {
   const { project, tags } = featured[index]
   return <section className={styles.hero} aria-labelledby="hero-title">
     <Landscape paused={paused} />
+    <figure className={styles.srOnly}>
+      <blockquote cite="https://www.bfi.org/challenge/2015/community-architects-network/">We are called to be architects of the future, not its victims.</blockquote>
+      <figcaption>R. Buckminster Fuller — inscribed on the garden wall.</figcaption>
+    </figure>
     <div className={styles.composition}>
       <motion.div className={styles.heroCopy} initial={reduced ? false : { y: 18 }} animate={{ y: 0 }} transition={{ duration: .65 }}>
         <h1 id="hero-title">Building<br /><span>brighter</span><br />tomorrows.</h1>

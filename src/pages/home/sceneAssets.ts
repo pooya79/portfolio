@@ -1,7 +1,7 @@
 import landscapeLight from '../../assets/images/generated/solarpunk-landscape-light.webp'
 import landscapeDark from '../../assets/images/generated/solarpunk-landscape-dark.webp'
-import foregroundLight from '../../assets/images/generated/solarpunk-foreground-light.webp'
-import foregroundDark from '../../assets/images/generated/solarpunk-foreground-dark.webp'
+import foregroundLight from '../../assets/images/generated/solarpunk-foreground-inscription-light.webp'
+import foregroundDark from '../../assets/images/generated/solarpunk-foreground-inscription-dark.webp'
 import cloudsLight from '../../assets/images/generated/solarpunk-clouds-light.webp'
 import cloudsDark from '../../assets/images/generated/solarpunk-clouds-dark.webp'
 

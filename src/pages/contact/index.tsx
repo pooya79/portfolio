@@ -122,8 +122,8 @@ export default function Contact() {
       <Reveal className={`${styles.panel} ${styles.quotePanel}`} delay={0.16}>
         <figure>
           <div className={styles.quoteImage}><img src={terraceImages[theme].small} alt="" width={1086} height={362} loading="lazy" /></div>
-          <blockquote>“A brighter tomorrow<br />is a conversation away.”</blockquote>
-          <figcaption>Pouya Fallah</figcaption>
+          <blockquote cite="https://afb.org/about-afb/history/helen-keller/quotes/helen-keller-quotes-progress">“Alone we can do so little; together we can do so much.”</blockquote>
+          <figcaption>Helen Keller</figcaption>
         </figure>
       </Reveal>
     </div>

@@ -37,7 +37,6 @@ export default function Projects() {
             <li><UsersThreeIcon size={27} /><span>Advance<br />Open Research</span></li>
             <li><GlobeHemisphereWestIcon size={27} /><span>Create<br />Positive Real-World Impact</span></li>
           </ul>
-          <blockquote>“A brighter tomorrow<br />is a project we can build together.”</blockquote>
         </Reveal>
       </div>
     </section>
@@ -80,8 +79,10 @@ export default function Projects() {
             <li><BookOpenIcon size={28} /><span>{researchCount}</span><p>Research Projects</p></li>
             <li><InfinityIcon size={28} /><span>∞</span><p>Ideas Ahead</p></li>
           </ul>
-          <blockquote>“Cleaner cities. Smarter tools.<br />A brighter tomorrow.”</blockquote>
-          <div className={styles.signature}><PlantIcon size={24} weight="duotone" /><span>Pouya Fallah</span></div>
+          <figure className={styles.quote}>
+            <blockquote cite="https://www.vam.ac.uk/collections/william-morris">“Have nothing in your houses that you do not know to be useful or believe to be beautiful.”</blockquote>
+            <figcaption className={styles.signature}><PlantIcon size={24} weight="duotone" aria-hidden="true" /><span>William Morris</span></figcaption>
+          </figure>
         </Reveal>
       </div>
     </section>
