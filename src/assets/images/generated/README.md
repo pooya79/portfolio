@@ -18,7 +18,11 @@ The design follows the supplied reference: a full-bleed cinematic scene, a left-
 
 ## Integration
 
-`src/pages/home/sceneAssets.ts` selects both landscape and foreground by the shared theme. The lake uses a softly masked duplicate of the landscape, so no extra generated assets are required. The project thumbnail uses that same themed landscape. Motion values handle scene depth, and CSS handles ambient lake movement and particles. Reduced motion and Pause motion stop the scene.
+The homepage background now uses `solarpunk-clouds-light.webp` and `solarpunk-clouds-dark.webp` through `heroLandscapeAssets`. Both are 1672 × 941 localized ImageGen edits of the original landscapes, encoded as WebP. A smooth ivory cloud veil in the upper-left day sky creates quiet space behind the introduction; the matching night treatment uses low-contrast navy clouds. The original framing, city, lake, boats, and mountain arrangement remain closely matched. Foreground layers and project thumbnails retain their original assets.
+
+Cloud edit prompts: preserve the source composition and objects; add a broad feathered cloud bank across the left sky and gently soften left mountain detail with atmospheric mist. Keep the city and water detailed. For night, match the day cloud placement using deep navy tones suitable for light text, retaining the original moon and warm city lights. No text or UI.
+
+`src/pages/home/sceneAssets.ts` selects both landscape and foreground by the shared theme. The lake uses a softly masked duplicate of the hero landscape, so no extra generated assets are required. The project thumbnail uses the original themed landscape. Motion values handle scene depth, and CSS handles ambient lake movement and particles. Reduced motion and Pause motion stop the scene.
 
 ## About page garden city
 
