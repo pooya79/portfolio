@@ -29,7 +29,6 @@ export default function About() {
           <p className={styles.eyebrow}>{biography.eyebrow}</p>
           <h1 id="about-title">About</h1>
           <p className={styles.subtitle}>{biography.subtitle}</p>
-          <p className={styles.introduction}>{biography.introduction}</p>
         </Reveal>
         <Reveal className={styles.quote} delay={0.15}>
           <PlantIcon size={32} weight="duotone" aria-hidden="true" />

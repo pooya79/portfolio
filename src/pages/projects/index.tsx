@@ -29,7 +29,6 @@ export default function Projects() {
           <p className={styles.eyebrow}>Building a brighter tomorrow</p>
           <h1 id="projects-title">Projects</h1>
           <p className={styles.subtitle}>AI systems, research, and products<br className={styles.desktopBreak} /> for a more livable tomorrow.</p>
-          <p className={styles.description}>A collection of my projects spanning AI, applied research, and real-world products. Each project is a step toward smarter tools and a brighter future.</p>
         </Reveal>
         <Reveal className={styles.principles} delay={0.15}>
           <ul>
