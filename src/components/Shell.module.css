@@ -44,4 +44,52 @@
 @media (max-width: 1050px) { .tagline { display: none; } }
 
 /* Nudge only these controls; preserve the logo and menu grid positions. */
-@media (min-width: 1051px) { .themeButton, .tagline { transform: translateX(clamp(-88px, calc((1050px - 100vw) * .42), 0px)); } }
+@media (min-width: 1051px) { .home .themeButton, .home .tagline { transform: translateX(clamp(-88px, calc((1050px - 100vw) * .42), 0px)); } }
+
+/* Local, feathered backdrops keep the header open and preserve the homepage link treatment. */
+.shell:not(.home) .header {
+  --nav-wash: rgb(250 249 240 / .94);
+  background: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+:global([data-theme='dark']) .shell:not(.home) .header {
+  --nav-wash: rgb(17 34 30 / .94);
+}
+.shell:not(.home) .brand,
+.shell:not(.home) .nav,
+.shell:not(.home) .actions {
+  position: relative;
+  isolation: isolate;
+}
+.shell:not(.home) .brand::before,
+.shell:not(.home) .nav::before,
+.shell:not(.home) .actions::before {
+  content: '';
+  position: absolute;
+  inset: -12px -16px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, var(--nav-wash) 35%, transparent 72%);
+}
+.shell:not(.home) .nav { justify-self: center; }
+.shell:not(.home) .nav::before {
+  inset-inline: -32px;
+  background: radial-gradient(ellipse at center, var(--nav-wash) 50%, transparent 85%);
+}
+@media (max-width: 1350px) {
+  .shell:not(.home) .tagline { display: none; }
+}
+@media (max-width: 800px) {
+  .shell:not(.home) .nav { justify-self: stretch; border-top: 0; }
+  .shell:not(.home) .nav::before { inset-inline: -16px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .shell:not(.home) .brand,
+  .shell:not(.home) .nav,
+  .shell:not(.home) .actions { background: var(--bg); }
+  .shell:not(.home) .brand::before,
+  .shell:not(.home) .nav::before,
+  .shell:not(.home) .actions::before { content: none; }
+}

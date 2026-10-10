@@ -1,0 +1,32 @@
+/* Decorative edge layer sits above page scenes and below navigation. */
+.foliage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: clip;
+  user-select: none;
+}
+
+.left, .right {
+  position: absolute;
+  width: clamp(90px, 9vw, 170px);
+  overflow: hidden;
+}
+
+.left { left: 0; top: 24%; }
+.right { right: 0; top: 55%; transform: scaleX(-1); }
+
+.foliage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: .88;
+}
+
+@media (max-width: 600px) {
+  .left, .right { width: 36px; }
+  .left { top: 29%; }
+  .right { top: 62%; }
+  .foliage img { opacity: .65; }
+}

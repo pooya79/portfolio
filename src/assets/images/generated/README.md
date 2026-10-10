@@ -71,3 +71,13 @@ The panorama has a low horizontal terrace silhouette, with the seating and vine-
 Prompt direction: follow the reference leaf and fine sun, maintain clean flat shapes and transparency, omit lettering and decoration. Generate the night pair by preserving shapes, dimensions, and positions while changing the palette.
 
 `Shell.tsx` selects the sheet using the shared theme. The visible sun/moon indicates the current theme; the accessible button label describes the switch action. The Georgia wordmark and navigation typography are preserved. The homepage header has no background, blur, frame, or bottom rule; inner pages retain a translucent ivory/forest surface. The tagline sits left of the theme icon with a divider between them, and both use the same offset on every page. A stable scrollbar gutter prevents route changes from shifting the navbar. Mobile keeps all five links on a second row. Reduced motion and reduced transparency retain their existing fallbacks on inner pages.
+
+## Inner-page edge foliage
+
+Generated with the built-in ImageGen tool. `edge-foliage-light.webp` and `edge-foliage-dark.webp` are matching 1024 × 1536 transparent botanical assets, encoded as WebP with alpha preserved. The night image is a lighting edit of the day image, preserving leaf and stem positions and canvas dimensions.
+
+Prompt set:
+- Day (stylized-concept): a slender airy climbing vine with ivy and small fern leaves entering from the left edge of a vertical 2:3 transparent canvas. Three irregular sparse clusters, curved stems, olive and sage greens, fine veins, warm soft daylight, semi-realistic painterly solarpunk style. Leaves confined to the left 55%, with transparent gaps and an empty right side. No pots, architecture, ground, text, people, frame, glow, or drop shadow.
+- Night (lighting-weather edit of day): preserve the exact 1024 × 1536 canvas, every leaf, stem, silhouette, location, scale, and transparent gap. Change only lighting and color to deep forest and muted blue-green with silver moonlit edges and veins, plus subdued warm bounce on a few tips. No new objects, sky, stars, neon, or filled background. Preserve alpha transparency.
+
+`src/components/EdgeFoliage.tsx` selects the matching asset through the shared theme. `Shell.tsx` renders it only outside Home, including project and blog detail routes. Both edges reuse the same artwork, mirrored and vertically offset. The fixed decorative layer is hidden from assistive technology and ignores pointer events. Narrow responsive sizing keeps foliage in the outer margins; mobile uses a small static detail. No animation is added, so reduced motion remains static.

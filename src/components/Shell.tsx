@@ -3,6 +3,7 @@ import { ArrowUpRightIcon } from '@phosphor-icons/react'
 import symbolsLight from '../assets/images/generated/navigation-symbols-light.webp'
 import symbolsDark from '../assets/images/generated/navigation-symbols-dark.webp'
 import { useTheme } from '../theme/theme'
+import { EdgeFoliage } from './EdgeFoliage'
 import styles from './Shell.module.css'
 import type { CSSProperties, ReactNode } from 'react'
 
@@ -39,6 +40,7 @@ export function Shell({ children }: { children: ReactNode }) {
         <Link to="/contact" className={styles.build}>Let’s build <ArrowUpRightIcon size={18} /></Link>
       </div>
     </header>
+    {!isHome && <EdgeFoliage />}
     <main id="main-content" tabIndex={-1} className={styles.main}>{children}</main>
     {!isHome && <footer className={styles.footer}><span>Pouya Fallah</span><span>Technology and humanity. A brighter tomorrow.</span></footer>}
   </div>
