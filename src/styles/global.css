@@ -1,4 +1,6 @@
 :root {
+  /* Keep navigation geometry stable between short and scrollable routes. */
+  scrollbar-gutter: stable;
   font-family: 'DM Sans Variable', sans-serif;
   --font-body: 'DM Sans Variable', sans-serif;
   --font-display: 'Outfit Variable', sans-serif;

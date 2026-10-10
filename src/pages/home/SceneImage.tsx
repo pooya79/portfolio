@@ -32,12 +32,9 @@ void main() {
     sampleAt.x += lake * sin(p.y * 190. + elapsed * 1.3) * .0009;
     sampleAt.y += lake * sin(p.x * 100. + p.y * 70. - elapsed * .9) * .00045;
   } else {
-    // Restrict wind to the outer vines and blurred corner foliage. The person
-    // and railing remain rigid, retaining their existing pointer parallax.
-    float vines = 1. - smoothstep(.035, .075, p.x);
-    float left = (1. - smoothstep(.13, .20, p.x)) * smoothstep(.85, .95, p.y);
-    float right = smoothstep(.86, .96, p.x) * smoothstep(.77, .9, p.y);
-    float leaves = max(vines, max(left, right));
+    // Only the isolated lower-right foliage sways. The left vines share pixels
+    // with the columns, so exclude that entire area to keep architecture rigid.
+    float leaves = smoothstep(.86, .96, p.x) * smoothstep(.77, .9, p.y);
     sampleAt.x += leaves * sin(elapsed * .85 + p.y * 9.) * .0018;
     sampleAt.y += leaves * sin(elapsed * 1.1 + p.x * 13.) * .0007;
   }

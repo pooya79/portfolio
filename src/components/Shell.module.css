@@ -13,7 +13,7 @@
 .navItem::after { content: ''; position: absolute; height: 7px; background: radial-gradient(circle, var(--accent) 0 3px, transparent 3.5px) center / 7px 7px no-repeat, linear-gradient(to right, var(--accent) calc(50% - 6px), transparent calc(50% - 6px), transparent calc(50% + 6px), var(--accent) calc(50% + 6px)) center / 100% 1px no-repeat; bottom: 3px; left: 20px; right: 20px; transform: scaleX(0); transform-origin: left; transition: transform 220ms; }
 .active, .navItem:hover, .navItem:focus-visible { color: var(--nav-ink); }
 .active::after, .navItem:hover::after, .navItem:focus-visible::after { transform: scaleX(1); }
-.actions { display: flex; align-items: center; gap: 16px; border-left: 1px solid var(--nav-rule); padding-left: 16px; }
+.actions { display: flex; align-items: center; gap: 16px; border-left: 1px solid transparent; padding-left: 16px; }
 .themeButton { display: grid; place-items: center; width: 46px; height: 46px; padding: 0; border: 0; background: transparent; border-radius: 50%; transition: background 180ms; }
 .themeSymbol { width: 46px; height: 46px; }
 .moon { background-position: right center; }
@@ -39,6 +39,9 @@
 /* The homepage scene remains completely unobscured, including in accessibility modes. */
 .home .header, :global([data-theme='dark']) .home .header { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
 
-.tagline { margin: 0; padding-left: 14px; border-left: 1px solid var(--nav-rule); color: var(--nav-muted); font-size: 7px; font-weight: 500; line-height: 2; letter-spacing: 2px; white-space: nowrap; }
+.tagline { margin: 0; padding-right: 14px; border-right: 1px solid var(--nav-rule); color: var(--nav-muted); font-size: 7px; font-weight: 500; line-height: 2; letter-spacing: 2px; white-space: nowrap; }
 @media (max-width: 1350px) { .build { display: none; } }
 @media (max-width: 1050px) { .tagline { display: none; } }
+
+/* Nudge only these controls; preserve the logo and menu grid positions. */
+@media (min-width: 1051px) { .themeButton, .tagline { transform: translateX(clamp(-88px, calc((1050px - 100vw) * .42), 0px)); } }

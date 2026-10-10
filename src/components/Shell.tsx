@@ -32,10 +32,10 @@ export function Shell({ children }: { children: ReactNode }) {
         {navigation.map(({ path, label }) => <NavLink key={path} to={path} end={path === '/'} className={({ isActive }) => `${styles.navItem} ${isActive ? styles.active : ''}`}>{label}</NavLink>)}
       </nav>
       <div className={styles.actions}>
+        <p className={styles.tagline}>TECHNOLOGY × HUMANITY<br />A BRIGHTER TOMORROW</p>
         <button className={styles.themeButton} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={theme === 'light' ? 'Switch to night' : 'Switch to day'} title={theme === 'light' ? 'Switch to night' : 'Switch to day'}>
           <span key={theme} className={`${styles.themeSymbol} ${theme === 'light' ? styles.sun : styles.moon}`} aria-hidden="true" />
         </button>
-        <p className={styles.tagline}>TECHNOLOGY × HUMANITY<br />A BRIGHTER TOMORROW</p>
         <Link to="/contact" className={styles.build}>Let’s build <ArrowUpRightIcon size={18} /></Link>
       </div>
     </header>
