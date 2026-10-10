@@ -22,7 +22,9 @@ The homepage background now uses `solarpunk-clouds-light.webp` and `solarpunk-cl
 
 Cloud edit prompts: preserve the source composition and objects; add a broad feathered cloud bank across the left sky and gently soften left mountain detail with atmospheric mist. Keep the city and water detailed. For night, match the day cloud placement using deep navy tones suitable for light text, retaining the original moon and warm city lights. No text or UI.
 
-`src/pages/home/sceneAssets.ts` selects both landscape and foreground by the shared theme. The lake uses a softly masked duplicate of the hero landscape, so no extra generated assets are required. The project thumbnail uses the original themed landscape. Motion values handle scene depth, and CSS handles ambient lake movement and particles. Reduced motion and Pause motion stop the scene.
+`src/pages/home/sceneAssets.ts` selects both landscape and foreground by the shared theme. The project thumbnail uses the original themed landscape. Motion values handle scene depth, and CSS handles ambient particles.
+
+`SceneImage.tsx` adds localized texture displacement to the existing artwork: a slow airship drift, small lake ripples, and gentle wind on the outer vines and corner foliage. Source-image coordinates keep these effects aligned through responsive cropping; no additional generated artwork is needed. The airship moves within a soft sky region rather than using a separate cutout. The person, architecture, and railing are excluded from these local effects. Rendering is capped at 30fps and 1.5 device pixel ratio, and stops when paused, offscreen, or the document is hidden. Reduced-motion users receive static images; image fallbacks also cover unavailable WebGL or context loss.
 
 ## About page garden city
 
@@ -61,3 +63,11 @@ Generated using the built-in ImageGen tool. Day and night are stored together as
 ### Visual analysis and integration
 
 The panorama has a low horizontal terrace silhouette, with the seating and vine-covered pergola across the right half and open sky and lake on the left. A soft theme-colored HTML wash creates contrast for the two-line 40–58px headline and 14px introduction. Beneath it, unequal columns give the form the most space, followed by contact channels and a shorter cropped view of the same themed artwork above a Georgia italic quote. Light panels use fine green-gray borders, 10px input corners, 18px panel corners, and pill-shaped olive actions; night tokens retain the same hierarchy. All interface text and controls are HTML.
+
+## Navigation identity
+
+`navigation-symbols-light.webp` and `navigation-symbols-dark.webp` are matching 2172 × 724 transparent ImageGen sprite sheets, losslessly encoded as WebP. Three equal cells contain a diagonal leaf with a curved accent and open central vein, a fine-rayed sun, and a crescent with a small star. The supplied navbar reference guided the silhouettes. Day uses charcoal green and olive; night uses ivory and sage. Original PNGs remain in the generated-image output directory.
+
+Prompt direction: follow the reference leaf and fine sun, maintain clean flat shapes and transparency, omit lettering and decoration. Generate the night pair by preserving shapes, dimensions, and positions while changing the palette.
+
+`Shell.tsx` selects the sheet using the shared theme. The visible sun/moon indicates the current theme; the accessible button label describes the switch action. The Georgia wordmark and navigation typography are preserved. The homepage header has no background, blur, frame, or bottom rule; inner pages retain a translucent ivory/forest surface. Mobile keeps all five links on a second row. Reduced motion and reduced transparency retain their existing fallbacks on inner pages.
