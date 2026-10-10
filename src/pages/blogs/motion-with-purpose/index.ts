@@ -5,6 +5,8 @@ export const motionWithPurpose: Post = {
   title: 'Making motion feel natural',
   description: 'Small movements, clear feedback, and knowing when to stay still.',
   category: 'Interaction',
+  image: 'library',
+  date: '2026-10-04',
   sections: [
     { title: 'Movement as feedback', text: 'A button responds when pressed. A new view enters as navigation changes. These moments help explain what the interface is doing.' },
     { title: 'Borrowing from nature', text: 'Spring motion can feel more organic than a rigid linear transition. Small changes in timing can give an interaction a sense of weight and responsiveness.' },
