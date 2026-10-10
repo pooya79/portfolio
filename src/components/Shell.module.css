@@ -42,3 +42,6 @@
 .tagline { margin: 0; padding-left: 14px; border-left: 1px solid var(--nav-rule); color: var(--nav-muted); font-size: 7px; font-weight: 500; line-height: 2; letter-spacing: 2px; white-space: nowrap; }
 @media (max-width: 1350px) { .build { display: none; } }
 @media (max-width: 1050px) { .tagline { display: none; } }
+
+/* Keep homepage controls away from the sun/moon in the upper-right artwork. */
+@media (min-width: 801px) { .home .header { grid-template-columns: auto auto auto; justify-content: start; gap: 14px; } .home .navItem { padding-inline: 12px; } .home .navItem::after { left: 12px; right: 12px; } .home .actions { gap: 8px; padding-left: 8px; } .home .build { display: none; } }
