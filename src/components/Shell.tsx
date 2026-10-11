@@ -19,7 +19,7 @@ export function Shell({ children }: { children: ReactNode }) {
   const { theme, setTheme } = useTheme()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
-  const isProjects = pathname === '/projects'
+  const isProjects = pathname.startsWith('/projects')
   const isAbout = pathname === '/about'
   const isBlogs = pathname === '/blogs'
   const isContact = pathname === '/contact'

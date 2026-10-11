@@ -53,11 +53,12 @@ export default function Projects() {
         </div>
       </div>
       <div className={styles.collectionBody}>
-        <div className={styles.projectGrid}>
+        <div className={`${styles.projectGrid} ${projectCollection.length === 1 ? styles.singleProject : ''}`}>
+          {visible.length === 0 && <div className={styles.noProjects}><h2>No projects in this category yet.</h2><p>Explore the research in the full collection.</p><button className="button" onClick={() => setFilter('All')}>Show all projects</button></div>}
           {visible.map(project => <motion.article key={project.slug} layout={!reduced} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
             <Link to={`/projects/${project.slug}`} className={styles.projectCard}>
               <div className={styles.cardImage}>
-                <img src={projectImages[project.image][theme]} srcSet={projectImageSources(project.image, theme)} sizes="(max-width: 540px) 170vw, (max-width: 800px) 80vw, 50vw" width={1672} height={941} style={{ objectPosition: project.imagePosition, transformOrigin: project.imagePosition, '--image-scale': project.imageScale ?? 1 } as CSSProperties} alt="" loading="lazy" />
+                <img src={projectImages[project.image][theme]} srcSet={projectImageSources(project.image, theme)} sizes="(max-width: 800px) 88vw, 65vw" width={1536} height={1024} style={{ objectPosition: project.imagePosition, transformOrigin: project.imagePosition, '--image-scale': project.imageScale ?? 1 } as CSSProperties} alt="" loading="lazy" />
                 <span className={styles.projectNumber}>{String(projectCollection.indexOf(project) + 1).padStart(2, '0')}</span>
               </div>
               <div className={styles.cardCopy}>
@@ -74,8 +75,8 @@ export default function Projects() {
           <div className={styles.shortRule} />
           <p>I connect AI research with software engineering, working through the practical details that turn a promising idea into a useful product.</p>
           <ul className={styles.stats} aria-label="Portfolio at a glance">
-            <li><CodeIcon size={28} /><span>{projectCollection.length}</span><p>Projects</p></li>
-            <li><BookOpenIcon size={28} /><span>{researchCount}</span><p>Research Projects</p></li>
+            <li><CodeIcon size={28} /><span>{projectCollection.length}</span><p>{projectCollection.length === 1 ? 'Project' : 'Projects'}</p></li>
+            <li><BookOpenIcon size={28} /><span>{researchCount}</span><p>{researchCount === 1 ? 'Research Project' : 'Research Projects'}</p></li>
             <li><InfinityIcon size={28} /><span>∞</span><p>Ideas Ahead</p></li>
           </ul>
           <figure className={styles.quote}>

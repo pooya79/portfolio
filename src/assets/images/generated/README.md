@@ -81,3 +81,7 @@ Prompt set:
 - Night (lighting-weather edit of day): preserve the exact 1024 × 1536 canvas, every leaf, stem, silhouette, location, scale, and transparent gap. Change only lighting and color to deep forest and muted blue-green with silver moonlit edges and veins, plus subdued warm bounce on a few tips. No new objects, sky, stars, neon, or filled background. Preserve alpha transparency.
 
 `src/components/EdgeFoliage.tsx` selects the matching asset through the shared theme. `Shell.tsx` renders it only outside Home, including project and blog detail routes. Both edges reuse the same artwork, mirrored and vertically offset. The fixed decorative layer is hidden from assistive technology and ignores pointer events. Narrow responsive sizing keeps foliage in the outer margins; mobile uses a small static detail. No animation is added, so reduced motion remains static.
+
+## Robust Persian ASR
+
+The dedicated MS thesis case study and its Home/Projects thumbnails use matching `robust-persian-asr-light.webp` and `robust-persian-asr-dark.webp` artwork, with matching 768-pixel responsive variants. The garden pavilion is an imagined visual metaphor for speech research. See [prompts, source notes, and verification](robust-persian-asr-prompts.md).

@@ -74,7 +74,7 @@ p { line-height: 1.65; }
 .empty-state { padding: 56px 0; max-width: 620px; }
 .empty-state h1 { font-size: clamp(28px, 4vw, 42px); }
 .empty-state p { color: var(--muted); }
-.about-loading { min-height: 100dvh; padding: 160px 6% 30px; }
-.about-loading p { color: var(--muted); }
+.route-loading { min-height: 100dvh; padding: 160px 6% 30px; }
+.route-loading p { color: var(--muted); }
 @media (prefers-reduced-motion: no-preference) { .button { transition: transform 200ms, filter 200ms; } .button:hover { transform: translateY(-2px); } .button:active { transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

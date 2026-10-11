@@ -125,3 +125,15 @@
   .stats { margin: 24px 0; }
   .sidebar blockquote { margin-bottom: 16px; }
 }
+
+/* Give the first real case study room to lead the collection. */
+.singleProject { grid-template-columns: minmax(0, 1fr); }
+.singleProject .cardImage { height: auto; aspect-ratio: 2.2; }
+.singleProject .cardCopy { padding: 22px 25px; }
+.singleProject .cardCopy h2 { font-size: 29px; }
+.singleProject .cardCopy p { max-width: 560px; font-size: 14px; line-height: 1.6; margin: 8px 45px 17px 0; }
+.singleProject .cardArrow { top: 25px; right: 24px; }
+.noProjects { padding: 35px 25px; min-height: 280px; }
+.noProjects h2 { font-size: 27px; }
+.noProjects p { color: var(--project-muted); font-size: 14px; }
+@media (max-width: 540px) { .singleProject .cardImage { aspect-ratio: 1.7; } .singleProject .cardCopy { padding: 18px; } .singleProject .cardCopy h2 { font-size: 25px; } .singleProject .cardCopy p { font-size: 13px; } .singleProject .cardArrow { right: 17px; top: 21px; } }

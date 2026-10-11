@@ -15,13 +15,15 @@ Open the local URL printed by Vite. Run `npm run lint` for linting, `npm run typ
 
 ## Pages and content
 
-The five navigation pages live in `src/pages/home`, `projects`, `blogs`, `about`, and `contact`. Each project or blog post has its own slug directory with a typed content export. Add that export to the corresponding `data.ts` collection to make it appear in the listing and detail route.
+The five navigation pages live in `src/pages/home`, `projects`, `blogs`, `about`, and `contact`. Each project or blog post has its own slug directory with typed content. Projects use dedicated page components; add their content to the project collection and register their detail route in `App.tsx`.
 
-The included projects and articles are labeled samples. Replace them with real portfolio content. The Contact page opens a prefilled draft in the visitor’s email app and also supports downloading a text draft. Sending happens in the email app. Contact details from the supplied reference live in `src/pages/contact/data.ts`.
+The project collection contains Robust Persian ASR, an MS thesis case study with Whisper Small and Medium, multi-condition training, and archived main-study results, and links to the repository and published Persian Whisper checkpoints. Blog samples remain separate from the project collection. The Contact page opens a prefilled draft in the visitor’s email app and also supports downloading a text draft. Sending happens in the email app. Contact details from the supplied reference live in `src/pages/contact/data.ts`.
 
 Shared components live in `src/components`. Fonts are bundled locally. Shared assets belong in `src/assets`, and future generated images belong in `src/assets/images/generated`. Keep matching `<name>-light` and `<name>-dark` assets together and select the appropriate variant using `useTheme`.
 
-The Home page recreates the supplied solarpunk reference with separate landscape and transparent foreground layers, each with matching day and night assets. Motion values drive pointer and scroll depth without React renders; CSS supplies subtle lake movement and drifting particles. Visitors can pause the scene, and reduced-motion preferences disable it automatically. The featured-project carousel links to the three project pages. The speech recognition entry is a clearly labeled outline based on the reference.
+The Home page recreates the supplied solarpunk reference with separate landscape and transparent foreground layers, each with matching day and night assets. Motion values drive pointer and scroll depth without React renders; CSS supplies subtle lake movement and drifting particles. Visitors can pause the scene, and reduced-motion preferences disable it automatically. The featured project is Robust Persian ASR, with its own theme-aware thumbnail and a link to `#/projects/robust-persian-asr`. The former Persian ASR and robust speech recognition URLs redirect to this case study. Other mock projects have been removed.
+
+The case study centers the main Whisper Small and Medium research runs, including standard training, multi-condition training, and the IranSeda data extension. Results include aggregate and per-dataset WER/CER across five test sets. Dual-view fusion remains a complementary architecture exploration. Scores come from archived research runs; model cards document the published checkpoint versions. Image prompts and source notes are recorded in `src/assets/images/generated/robust-persian-asr-prompts.md`.
 
 The optimized WebP assets and generation notes live in `src/assets/images/generated/`. The scenery is decorative; all text, navigation, and project controls are semantic HTML.
 

@@ -1,25 +1,17 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { ArrowRightIcon, CaretLeftIcon, CaretRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react'
-import { projects } from '../projects/data'
+import { motion, useReducedMotion } from 'motion/react'
+import { ArrowRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react'
+import { robustPersianAsr as project } from '../projects/robust-persian-asr/data'
+import { projectImages, projectImageSources } from '../projects/sceneAssets'
 import { Landscape } from './Landscape'
 import { useTheme } from '../../theme/theme'
-import { landscapeAssets } from './sceneAssets'
 import styles from './Home.module.css'
 
-const featured = [
-  { project: projects.find(project => project.slug === 'robust-speech-recognition')!, tags: ['AI', 'Speech', 'Scalability'] },
-  { project: projects.find(project => project.slug === 'living-web')!, tags: ['React', 'Design', 'Motion'] },
-  { project: projects.find(project => project.slug === 'daylight-study')!, tags: ['Light', 'Color', 'Experiment'] },
-]
-
 export default function Home() {
-  const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const reduced = useReducedMotion()
   const { theme } = useTheme()
-  const { project, tags } = featured[index]
   return <section className={styles.hero} aria-labelledby="hero-title">
     <Landscape paused={paused} />
     <figure className={styles.srOnly}>
@@ -35,25 +27,14 @@ export default function Home() {
       <motion.aside className={styles.featured} aria-label="Featured projects" initial={reduced ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .4 }}>
         <div className={styles.cardHeader}>
           <span>FEATURED PROJECT</span>
-          <div className={styles.carouselControls}>
-            <span className={styles.count}>{String(index + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}</span>
-            <button aria-label="Previous featured project" onClick={() => setIndex((index + featured.length - 1) % featured.length)}><CaretLeftIcon size={18} /></button>
-            <button aria-label="Next featured project" onClick={() => setIndex((index + 1) % featured.length)}><CaretRightIcon size={18} /></button>
-          </div>
         </div>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div key={project.slug} initial={reduced ? false : { opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: reduced ? 0 : -8 }} transition={{ duration: reduced ? 0 : .18 }}>
-            <div className={styles.preview}>
-              <img src={landscapeAssets[theme]} alt="" width={1672} height={941} className={styles[`preview${index}`]} />
-            </div>
-            <div aria-live="polite" aria-atomic="true">
-              <h2>{project.title}</h2>
-              <p className={styles.description}>{project.description}</p>
-              <ul className={styles.tags} aria-label="Project topics">{tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-            </div>
-            <Link className={styles.projectLink} to={`/projects/${project.slug}`}>VIEW PROJECT <ArrowRightIcon size={25} /></Link>
-          </motion.div>
-        </AnimatePresence>
+        <div className={styles.preview}>
+          <img src={projectImages.asr[theme]} srcSet={projectImageSources('asr', theme)} sizes="(max-width: 800px) 88vw, 392px" alt="A sculptural listening pavilion surrounded by a lush garden." width={1536} height={1024} />
+        </div>
+        <h2>{project.title}</h2>
+        <p className={styles.description}>{project.description}</p>
+        <ul className={styles.tags} aria-label="Project topics">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+        <Link className={styles.projectLink} to={`/projects/${project.slug}`}>VIEW PROJECT <ArrowRightIcon size={25} /></Link>
       </motion.aside>
     </div>
     <div className={styles.sceneControls}>
