@@ -5,6 +5,7 @@
 - Build the portfolio with React as a static website. Keep content and behavior in the frontend; do not introduce a backend or server-dependent features.
 - The main navigation has five pages, in this order: Home, Projects, Blogs, About, Contact.
 - Give each main page its own directory. Give every individual project and blog post its own directory within its corresponding page directory, using a stable descriptive slug.
+- Build a unique, dedicated page for each portfolio project, with content and design tailored to that project. Consistency between project pages is preferred but optional; each project may have its own layout and visual treatment.
 - Keep page-specific components and content with their page; put reusable components in `src/components/` and shared assets in `src/assets/`.
 
 Use this directory convention when implementing the site:
