@@ -27,7 +27,13 @@ The optimized WebP assets and generation notes live in `src/assets/images/genera
 
 ## Static hosting
 
-Upload the contents of `dist/` to a static host. Hash-based routes work without server rewrite rules, including directly opening or refreshing project and blog links. For deployment under a subdirectory, set Vite's `base` option to that directory before building.
+The portfolio is deployed to [GitHub Pages](https://pooya79.github.io/portfolio/). Every push to `main` runs `.github/workflows/deploy.yml`: install the locked dependencies with Node.js 24, lint, check TypeScript, build, and publish `dist/`. Deployment only runs after all build checks pass. The workflow can also be started manually from the repository's Actions tab. It uses GitHub's built-in token; no deployment secret is needed.
+
+For initial setup, select **GitHub Actions** under **Settings → Pages → Build and deployment → Source**. GitHub Pages requires an eligible plan when the repository is private. The deployed portfolio is publicly accessible.
+
+Vite uses relative asset URLs (`base: './'`), so the same build works at `/portfolio/`, a domain root, or another subdirectory. Hash-based routes work without server rewrite rules, including directly opening or refreshing project and blog links. To deploy elsewhere, upload the contents of `dist/` to a static host.
+
+The contact form remains entirely in the browser: it opens a prefilled email draft or downloads a text draft. GitHub Pages does not send or store form submissions; the visitor sends the message from their email app.
 
 ## Theme and accessibility
 
