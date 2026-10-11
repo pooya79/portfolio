@@ -1,3 +1,11 @@
+## Branch and release policy
+
+- Use two branches: `dev` for development and `main` for releases that deploy the live site.
+- When the user asks to commit or push, switch to `dev` first and commit and push there. Create `dev` if it does not exist.
+- If the user asks to commit or push directly to `main`, warn that `main` deploys the live site and perform ordinary commits and pushes on `dev` instead.
+- Update `main` only by merging `dev` into `main`, and only when the user explicitly requests that merge. A general request to commit, push, publish, or deploy does not authorize merging into `main`.
+- Pushing `main` is allowed only to publish that explicitly requested merge; never make direct development commits on `main`.
+
 ## Portfolio requirements
 
 ### Architecture and pages
