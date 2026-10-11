@@ -8,8 +8,8 @@ import styles from './Contact.module.css'
 
 const channels = [
   { title: 'Email', detail: contactDetails.email, href: `mailto:${contactDetails.email}`, icon: EnvelopeSimpleIcon },
-  { title: 'GitHub', detail: 'github.com/pouyafallah', href: contactDetails.github, icon: GithubLogoIcon },
-  { title: 'LinkedIn', detail: 'linkedin.com/in/pouyafallah', href: contactDetails.linkedin, icon: LinkedinLogoIcon },
+  { title: 'GitHub', detail: 'github.com/pooya79', href: contactDetails.github, icon: GithubLogoIcon },
+  { title: 'LinkedIn', detail: 'linkedin.com/in/pouya-fallah-79b43a189', href: contactDetails.linkedin, icon: LinkedinLogoIcon },
 ]
 
 function messageDraft(form: HTMLFormElement) {

@@ -1,7 +1,7 @@
-// Contact details from the supplied Contact-page reference.
+// Contact details supplied by Pouya.
 export const contactDetails = {
-  email: 'pouya.fallah@gmail.com',
-  github: 'https://github.com/pouyafallah',
-  linkedin: 'https://www.linkedin.com/in/pouyafallah',
+  email: 'pooyafallah79@gmail.com',
+  github: 'https://github.com/pooya79',
+  linkedin: 'https://www.linkedin.com/in/pouya-fallah-79b43a189/',
   location: 'Based on Earth · Open to remote',
 }
