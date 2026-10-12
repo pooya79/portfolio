@@ -6,7 +6,7 @@ import { useTheme } from '../theme/theme'
 import styles from './AppProjectShowcase.module.css'
 
 type Highlight = { icon: Icon; title: string; description: string }
-type AppScreen = { id: string; label: string; src: string; alt: string; caption: string; width: number; height: number }
+type AppScreen = { id: string; label: string; src: string | { light: string; dark: string }; alt: string; caption: string; width: number; height: number }
 export type AppProjectContent = {
   title: string
   subtitle: string
@@ -17,6 +17,7 @@ export type AppProjectContent = {
   repository: string
   technologies: string[]
   screens: AppScreen[]
+  visualKind?: 'screenshot' | 'diagram'
   challenge: ReactNode
   features: Highlight[]
   architecture: {
@@ -35,10 +36,11 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
   const { theme } = useTheme()
   const [screenId, setScreenId] = useState(project.screens[0].id)
   const screen = project.screens.find(item => item.id === screenId)!
+  const screenSrc = typeof screen.src === 'string' ? screen.src : screen.src[theme]
 
   return <article className={styles.page}>
     <div className={styles.hero}>
-      {project.heroBackground && <div className={styles.heroBackdrop} aria-hidden="true"><img src={project.heroBackground[theme]} alt="" width={1536} height={1024} /></div>}
+      {project.heroBackground && <div className={styles.heroBackdrop} aria-hidden="true"><img src={project.heroBackground[theme]} alt="" width={1536} height={1024} fetchPriority="high" /></div>}
       <Reveal className={styles.introduction}>
         <Link className={styles.back} to="/projects"><ArrowLeftIcon size={16} /> Back to projects</Link>
         <h1>{project.title}</h1>
@@ -49,17 +51,17 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
 
       <Reveal className={styles.gallery} delay={0.08}>
         <figure className={styles.preview} id="app-preview">
-          <a className={styles.screenshotLink} key={screen.id} href={screen.src} target="_blank" rel="noreferrer" aria-label={`Enlarge ${screen.label.toLowerCase()} screenshot (opens in a new tab)`}>
-            <img src={screen.src} alt={screen.alt} width={screen.width} height={screen.height} fetchPriority="high" />
+          <a className={styles.screenshotLink} key={screen.id} href={screenSrc} target="_blank" rel="noreferrer" aria-label={`Enlarge ${screen.label.toLowerCase()} ${project.visualKind ?? 'screenshot'} (opens in a new tab)`}>
+            <img src={screenSrc} alt={screen.alt} width={screen.width} height={screen.height} fetchPriority="high" />
           </a>
-          <figcaption><span aria-live="polite">{screen.caption}</span><a href={screen.src} target="_blank" rel="noreferrer">Enlarge <ArrowUpRightIcon size={13} /></a></figcaption>
+          <figcaption><span aria-live="polite">{screen.caption}</span><a href={screenSrc} target="_blank" rel="noreferrer">Enlarge <ArrowUpRightIcon size={13} /></a></figcaption>
         </figure>
-        <div className={styles.screenPicker} style={{ gridTemplateColumns: `repeat(${project.screens.length}, minmax(0, 1fr))` }} role="group" aria-label="Application screenshots">
+        {project.screens.length > 1 && <div className={styles.screenPicker} style={{ gridTemplateColumns: `repeat(${project.screens.length}, minmax(0, 1fr))` }} role="group" aria-label={project.visualKind === 'diagram' ? 'Architecture diagrams' : 'Application screenshots'}>
           {project.screens.map(item => <button key={item.id} aria-pressed={screen.id === item.id} aria-controls="app-preview" onClick={() => setScreenId(item.id)}>
-            <img src={item.src} alt="" width={item.width} height={item.height} />
+            <img src={typeof item.src === 'string' ? item.src : item.src[theme]} alt="" width={item.width} height={item.height} />
             <span>{item.label}</span>
           </button>)}
-        </div>
+        </div>}
       </Reveal>
 
       <Reveal className={styles.facts} delay={0.15}>

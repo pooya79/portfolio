@@ -13,7 +13,7 @@ export type ShowcaseProject = Project & {
   presentation: 'research' | 'app'
   tags: string[]
   filters: ProjectFilter[]
-  image: 'workshop' | 'audio' | 'landscape' | 'asr' | 'torobrent' | 'piko'
+  image: 'workshop' | 'audio' | 'landscape' | 'asr' | 'torobrent' | 'piko' | 'torobAgent'
   imagePosition: string
   imageScale?: number
 }
