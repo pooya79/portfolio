@@ -6,6 +6,7 @@ import Projects from './pages/projects'
 import Home from './pages/home'
 import Contact from './pages/contact'
 import Blogs from './pages/blogs'
+import { FirstVisitLoader } from './components/FirstVisitLoader'
 
 const RobustPersianAsr = lazy(() => import('./pages/projects/robust-persian-asr'))
 const TorobRent = lazy(() => import('./pages/projects/torobrent'))
@@ -28,12 +29,12 @@ export default function App() {
     }
   }, [pathname])
 
-  return <Shell>
+  return <FirstVisitLoader><Shell>
     <motion.div key={pathname} initial={reduced || pathname === '/' ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
       <Suspense fallback={(pathname === '/about' || pathname.startsWith('/projects/'))
         ? <div className="route-loading"><p role="status">Opening this corner of the garden…</p></div>
         : <p role="status">Opening this corner of the garden…</p>}>
-        <Routes>
+        <div data-loading-content style={{ display: 'contents' }}><Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/robust-persian-asr" element={<RobustPersianAsr />} />
@@ -47,8 +48,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<div className="empty-state"><h1>This path is still unplanted.</h1><p>The page you’re looking for isn’t here.</p><Link className="button" to="/">Back to home</Link></div>} />
-        </Routes>
+        </Routes></div>
       </Suspense>
     </motion.div>
-  </Shell>
+  </Shell></FirstVisitLoader>
 }
