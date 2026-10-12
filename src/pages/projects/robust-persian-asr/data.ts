@@ -6,7 +6,7 @@ export const resultsArchive = `${repository}/tree/main/report`
 export const robustPersianAsr: ShowcaseProject = {
   slug: 'robust-persian-asr',
   title: 'Robust Persian ASR',
-  description: 'My MS thesis on robust Persian speech recognition with Whisper Small and Medium, realistic telephone degradations, and multi-condition training.',
+  description: 'My MS thesis on robust Persian speech recognition with Whisper Small and Medium, multi-condition training, and dual-view fusion.',
   category: 'Research', motif: 'leaf',
   tags: ['Speech AI', 'MS Thesis', 'PyTorch'], filters: ['AI', 'Research'],
   image: 'asr', imagePosition: '65% 52%',
@@ -14,7 +14,7 @@ export const robustPersianAsr: ShowcaseProject = {
   details: [],
 }
 
-// Main research runs from report/{whisper,whisper-deg,whisper-medium,whisper-iranseda}/metrics.json.
+// Main research runs from report/{whisper,whisper-deg,whisper-medium,whisper-iranseda,whisper-fusion-compact}/metrics.json.
 // Cross-checked against Thesis/chapters/results.tex. Scores are percentages.
 export const evaluationSets = [
   {
@@ -186,6 +186,42 @@ export const methods = [
         "wer": 25.87,
         "cer": 14.16,
         "examples": 391
+      }
+    }
+  },
+  {
+    "name": "Whisper Small · dual-view fusion (unreleased)",
+    "source": "whisper-fusion-compact/metrics.json",
+    "scores": {
+      "aggregate": {
+        "wer": 17.64,
+        "cer": 7.85,
+        "examples": 21854
+      },
+      "agfarsdat": {
+        "wer": 25.37,
+        "cer": 12.39,
+        "examples": 10044
+      },
+      "cv25": {
+        "wer": 7.53,
+        "cer": 3.13,
+        "examples": 10519
+      },
+      "fleurs": {
+        "wer": 19.67,
+        "cer": 6.29,
+        "examples": 871
+      },
+      "persianSpeech": {
+        "wer": 31.81,
+        "cer": 12.95,
+        "examples": 24
+      },
+      "speechCorpus": {
+        "wer": 33.82,
+        "cer": 19.95,
+        "examples": 396
       }
     }
   }

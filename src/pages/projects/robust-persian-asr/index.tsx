@@ -38,7 +38,7 @@ export default function RobustPersianAsr() {
           <p className={styles.eyebrow}>MS thesis · Speech recognition</p>
           <h1>Robust<br />Persian ASR</h1>
           <p className={styles.subtitle}>Understanding speech,<br />beyond the noise.</p>
-          <p className={styles.summary}>Adapting Whisper Small and Medium to Persian speech, from everyday recordings to real telephone and VoIP conditions.</p>
+          <p className={styles.summary}>My MS thesis on adapting Whisper Small and Medium to Persian speech, from everyday recordings to real telephone and VoIP conditions.</p>
           <div className={styles.actions}>
             <button className={styles.primary} onClick={() => goToSection('approach')}>Explore the research <ArrowRightIcon size={19} /></button>
             <a className={styles.secondary} href={repository} target="_blank" rel="noreferrer"><GithubLogoIcon size={20} /> View on GitHub <ArrowUpRightIcon size={16} /></a>
@@ -94,7 +94,7 @@ export default function RobustPersianAsr() {
     <section id="findings" tabIndex={-1} className={`${styles.section} ${styles.findings}`} aria-labelledby="findings-title">
       <Reveal>
         <h2 id="findings-title">What the experiments show.</h2>
-        <p className={styles.lead}>The main Whisper Small and Medium study.</p>
+        <p className={styles.lead}>The main Whisper Small and Medium study, including dual-view fusion.</p>
         <label className={styles.datasetSelect}>Evaluation set
           <select value={dataset} onChange={event => setDataset(event.target.value as EvaluationSet)}>
             {evaluationSets.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}
@@ -107,13 +107,13 @@ export default function RobustPersianAsr() {
         </div>
         <div className={styles.tableWrap}>
           <table>
-            <caption>{evaluationSet.name} · {methods[0].scores[dataset].examples.toLocaleString('en-US')} evaluated utterances per model</caption>
+            <caption>{evaluationSet.name} · {methods[0].scores[dataset].examples.toLocaleString('en-US')} standalone / {methods[4].scores[dataset].examples.toLocaleString('en-US')} fusion utterances</caption>
             <thead><tr><th scope="col">Method</th><th scope="col">WER (%)</th><th scope="col">CER (%)</th></tr></thead>
             <tbody>{methods.map((method, index) => <tr key={method.name} className={index === 2 ? styles.best : undefined}><th scope="row">{method.name}</th><td>{method.scores[dataset].wer.toFixed(2)}</td><td>{method.scores[dataset].cer.toFixed(2)}</td></tr>)}</tbody>
           </table>
         </div>
-        <p className={styles.resultNote}>WER measures word errors; CER measures character errors. Lower is better. Each main run evaluated 21,848 utterances across five test sets; six over-length labels were skipped. Aggregate scores are computed from total errors and reference units, rather than a simple average of dataset percentages. PersianSpeech contains only 24 evaluated utterances.</p>
-        <p className={styles.takeaway}>Multi-condition training reduced Small’s aggregate WER from 23.27% to 17.83%, and its WER on real telephone/VoIP speech from 35.63% to 25.80%. Medium achieved the lowest aggregate WER at 14.36%. Adding IranSeda speech brought Small to 17.22% overall, with gains that varied by domain.</p>
+        <p className={styles.resultNote}>WER measures word errors; CER measures character errors. Lower is better. The standalone runs evaluated 21,848 utterances across five test sets, skipping six over-length labels. Fusion evaluated 21,854 utterances, so its comparison has a small sample-count difference. Aggregate scores are computed from total errors and reference units, rather than a simple average of dataset percentages. PersianSpeech contains only 24 evaluated utterances.</p>
+        <p className={styles.takeaway}>Multi-condition training reduced Small’s aggregate WER from 23.27% to 17.83%, and its WER on real telephone/VoIP speech from 35.63% to 25.80%. Medium achieved the lowest aggregate WER at 14.36%. Adding IranSeda speech brought Small to 17.22% overall, with gains that varied by domain. Small’s dual-view fusion reached 17.64% WER and 7.85% CER, a modest improvement over the multi-condition baseline.</p>
         <a className="text-link" href={resultsArchive} target="_blank" rel="noreferrer">Read the main evaluation reports <ArrowUpRightIcon size={16} /></a>
       </Reveal>
       <Reveal className={styles.resources}>
@@ -126,7 +126,7 @@ export default function RobustPersianAsr() {
           <a href={repository} target="_blank" rel="noreferrer"><span><strong>Source & experiments</strong><small>Data pipelines, training recipes, evaluation</small></span><ArrowUpRightIcon size={23} /></a>
           {models.map(model => <a key={model.id} href={model.href} target="_blank" rel="noreferrer"><span><strong>{model.name} · Persian</strong><small>{model.id}</small></span><ArrowUpRightIcon size={23} /></a>)}
         </div>
-        <p className={styles.modelNote}>Scores above describe the archived research runs. See each model card for the published checkpoint version, access requirements, inference instructions, and training details.</p>
+        <p className={styles.modelNote}>The fusion model is an unreleased research model; no fusion checkpoint is published. Scores above describe the archived research runs. See each Small or Medium model card for the published checkpoint version, access requirements, inference instructions, and training details.</p>
       </Reveal>
     </section>
   </article>
