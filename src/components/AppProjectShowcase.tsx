@@ -26,6 +26,8 @@ export type AppProjectContent = {
     note: string
   }
   delivery: Highlight[]
+  deliveryTitle?: string
+  status?: { title: string; description: string }
 }
 
 // App projects use a compact visual overview; research keeps its detailed case-study pages.
@@ -52,7 +54,7 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
           </a>
           <figcaption><span aria-live="polite">{screen.caption}</span><a href={screen.src} target="_blank" rel="noreferrer">Enlarge <ArrowUpRightIcon size={13} /></a></figcaption>
         </figure>
-        <div className={styles.screenPicker} role="group" aria-label="Application screenshots">
+        <div className={styles.screenPicker} style={{ gridTemplateColumns: `repeat(${project.screens.length}, minmax(0, 1fr))` }} role="group" aria-label="Application screenshots">
           {project.screens.map(item => <button key={item.id} aria-pressed={screen.id === item.id} aria-controls="app-preview" onClick={() => setScreenId(item.id)}>
             <img src={item.src} alt="" width={item.width} height={item.height} />
             <span>{item.label}</span>
@@ -68,6 +70,11 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
         <ul className={styles.technologies}>{project.technologies.map(technology => <li key={technology}>{technology}</li>)}</ul>
       </Reveal>
     </div>
+
+    {project.status && <Reveal className={styles.status}>
+      <h2>{project.status.title}</h2>
+      <p>{project.status.description}</p>
+    </Reveal>}
 
     <div className={styles.overview}>
       <Reveal className={styles.challenge}>
@@ -93,7 +100,7 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
         <p className={styles.architectureNote}>{project.architecture.note}</p>
       </Reveal>
       <Reveal className={styles.delivery} delay={0.12}>
-        <h2>Delivered</h2>
+        <h2>{project.deliveryTitle ?? 'Delivered'}</h2>
         <ul className={styles.highlights}>{project.delivery.map(({ icon: DeliveryIcon, title, description }) => <li key={title}>
           <span className={styles.iconTile}><DeliveryIcon size={23} weight="duotone" aria-hidden="true" /></span>
           <div><h3>{title}</h3><p>{description}</p></div>

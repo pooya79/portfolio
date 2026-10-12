@@ -4,12 +4,14 @@ import { motion, useReducedMotion } from 'motion/react'
 import { ArrowRightIcon, CaretLeftIcon, CaretRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react'
 import { robustPersianAsr } from '../projects/robust-persian-asr/data'
 import { torobrent, productViews } from '../projects/torobrent/data'
+import { piko, productViews as pikoViews } from '../projects/piko/data'
 import { projectImages, projectImageSources } from '../projects/sceneAssets'
 import { Landscape } from './Landscape'
 import { useTheme } from '../../theme/theme'
 import styles from './Home.module.css'
 
 const featuredProjects = [
+  { project: piko, alt: pikoViews[0].alt, width: 1600, height: 1050 },
   { project: torobrent, alt: productViews[0].alt, width: 1600, height: 900 },
   { project: robustPersianAsr, alt: 'A sculptural listening pavilion surrounded by a lush garden.', width: 1536, height: 1024 },
 ]

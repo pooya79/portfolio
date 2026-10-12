@@ -3,6 +3,7 @@ import asrDark from '../../assets/images/generated/robust-persian-asr-dark.webp'
 import asrSmallLight from '../../assets/images/generated/robust-persian-asr-small-light.webp'
 import asrSmallDark from '../../assets/images/generated/robust-persian-asr-small-dark.webp'
 import torobrentScreenshot from '../../assets/images/torobrent/search.webp'
+import pikoScreenshot from '../../assets/images/piko/flow.webp'
 import workshopLight from '../../assets/images/generated/projects-workshop-light.webp'
 import workshopDark from '../../assets/images/generated/projects-workshop-dark.webp'
 import audioLight from '../../assets/images/generated/projects-audio-light.webp'
@@ -17,6 +18,7 @@ import landscapeSmallLight from '../../assets/images/generated/solarpunk-landsca
 import landscapeSmallDark from '../../assets/images/generated/solarpunk-landscape-small-dark.webp'
 
 export const projectImages = {
+  piko: { light: pikoScreenshot, dark: pikoScreenshot, small: { light: pikoScreenshot, dark: pikoScreenshot } },
   torobrent: { light: torobrentScreenshot, dark: torobrentScreenshot, small: { light: torobrentScreenshot, dark: torobrentScreenshot } },
   asr: { light: asrLight, dark: asrDark, small: { light: asrSmallLight, dark: asrSmallDark } },
   workshop: { light: workshopLight, dark: workshopDark, small: { light: workshopSmallLight, dark: workshopSmallDark } },
@@ -26,7 +28,7 @@ export const projectImages = {
 
 export function projectImageSources(image: keyof typeof projectImages, theme: 'light' | 'dark') {
   const assets = projectImages[image]
-  if (image === 'torobrent') return `${assets[theme]} 1600w`
+  if (image === 'torobrent' || image === 'piko') return `${assets[theme]} 1600w`
   const widths = image === 'asr' ? [768, 1536] : [836, 1672]
   return `${assets.small[theme]} ${widths[0]}w, ${assets[theme]} ${widths[1]}w`
 }
