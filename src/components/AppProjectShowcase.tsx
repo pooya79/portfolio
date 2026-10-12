@@ -1,0 +1,104 @@
+import { useState, type ReactNode } from 'react'
+import { Link } from 'react-router'
+import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon, CalendarBlankIcon, DatabaseIcon, GithubLogoIcon, StackIcon, UserIcon, type Icon } from '@phosphor-icons/react'
+import { Reveal } from './Reveal'
+import { useTheme } from '../theme/theme'
+import styles from './AppProjectShowcase.module.css'
+
+type Highlight = { icon: Icon; title: string; description: string }
+type AppScreen = { id: string; label: string; src: string; alt: string; caption: string; width: number; height: number }
+export type AppProjectContent = {
+  title: string
+  subtitle: string
+  summary: string
+  year: number
+  role: string
+  heroBackground?: { light: string; dark: string }
+  repository: string
+  technologies: string[]
+  screens: AppScreen[]
+  challenge: ReactNode
+  features: Highlight[]
+  architecture: {
+    nodes: { icon: Icon; label: string }[]
+    storage: string
+    jobs: string
+    note: string
+  }
+  delivery: Highlight[]
+}
+
+// App projects use a compact visual overview; research keeps its detailed case-study pages.
+export function AppProjectShowcase({ project }: { project: AppProjectContent }) {
+  const { theme } = useTheme()
+  const [screenId, setScreenId] = useState(project.screens[0].id)
+  const screen = project.screens.find(item => item.id === screenId)!
+
+  return <article className={styles.page}>
+    <div className={styles.hero}>
+      {project.heroBackground && <div className={styles.heroBackdrop} aria-hidden="true"><img src={project.heroBackground[theme]} alt="" width={1536} height={1024} /></div>}
+      <Reveal className={styles.introduction}>
+        <Link className={styles.back} to="/projects"><ArrowLeftIcon size={16} /> Back to projects</Link>
+        <h1>{project.title}</h1>
+        <p className={styles.subtitle}>{project.subtitle}</p>
+        <p className={styles.summary}>{project.summary}</p>
+        <a className={styles.primary} href={project.repository} target="_blank" rel="noreferrer"><GithubLogoIcon size={20} /> View on GitHub <ArrowUpRightIcon size={16} /></a>
+      </Reveal>
+
+      <Reveal className={styles.gallery} delay={0.08}>
+        <figure className={styles.preview} id="app-preview">
+          <a className={styles.screenshotLink} key={screen.id} href={screen.src} target="_blank" rel="noreferrer" aria-label={`Enlarge ${screen.label.toLowerCase()} screenshot (opens in a new tab)`}>
+            <img src={screen.src} alt={screen.alt} width={screen.width} height={screen.height} fetchPriority="high" />
+          </a>
+          <figcaption><span aria-live="polite">{screen.caption}</span><a href={screen.src} target="_blank" rel="noreferrer">Enlarge <ArrowUpRightIcon size={13} /></a></figcaption>
+        </figure>
+        <div className={styles.screenPicker} role="group" aria-label="Application screenshots">
+          {project.screens.map(item => <button key={item.id} aria-pressed={screen.id === item.id} aria-controls="app-preview" onClick={() => setScreenId(item.id)}>
+            <img src={item.src} alt="" width={item.width} height={item.height} />
+            <span>{item.label}</span>
+          </button>)}
+        </div>
+      </Reveal>
+
+      <Reveal className={styles.facts} delay={0.15}>
+        <div className={styles.year}><div className={styles.factHeading}><CalendarBlankIcon size={23} /><h2>Year</h2></div><p>{project.year}</p></div>
+        <div className={styles.factHeading}><UserIcon size={23} /><h2>My role</h2></div>
+        <p>{project.role}</p>
+        <div className={styles.factHeading}><StackIcon size={23} /><h2>Tech stack</h2></div>
+        <ul className={styles.technologies}>{project.technologies.map(technology => <li key={technology}>{technology}</li>)}</ul>
+      </Reveal>
+    </div>
+
+    <div className={styles.overview}>
+      <Reveal className={styles.challenge}>
+        <h2>The challenge</h2>
+        <div>{project.challenge}</div>
+      </Reveal>
+      <Reveal className={styles.features} delay={0.04}>
+        <h2>Key features</h2>
+        <ul className={styles.highlights}>{project.features.map(({ icon: FeatureIcon, title, description }) => <li key={title}>
+          <span className={styles.iconTile}><FeatureIcon size={23} weight="duotone" aria-hidden="true" /></span>
+          <div><h3>{title}</h3><p>{description}</p></div>
+        </li>)}</ul>
+      </Reveal>
+      <Reveal className={styles.architecture} delay={0.08}>
+        <h2>Architecture</h2>
+        <div className={styles.flow}>
+          {project.architecture.nodes.map(({ icon: NodeIcon, label }, index) => <div className={styles.flowStep} key={label}>
+            {index > 0 && <ArrowRightIcon size={17} aria-hidden="true" className={styles.arrow} />}
+            <div className={styles.node}><NodeIcon size={28} weight="duotone" aria-hidden="true" /><span>{label}</span></div>
+          </div>)}
+        </div>
+        <div className={styles.storage}><DatabaseIcon size={21} aria-hidden="true" /><span>{project.architecture.storage}<small>{project.architecture.jobs}</small></span></div>
+        <p className={styles.architectureNote}>{project.architecture.note}</p>
+      </Reveal>
+      <Reveal className={styles.delivery} delay={0.12}>
+        <h2>Delivered</h2>
+        <ul className={styles.highlights}>{project.delivery.map(({ icon: DeliveryIcon, title, description }) => <li key={title}>
+          <span className={styles.iconTile}><DeliveryIcon size={23} weight="duotone" aria-hidden="true" /></span>
+          <div><h3>{title}</h3><p>{description}</p></div>
+        </li>)}</ul>
+      </Reveal>
+    </div>
+  </article>
+}

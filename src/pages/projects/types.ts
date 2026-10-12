@@ -10,9 +10,10 @@ export type Project = {
 
 export type ProjectFilter = 'All' | 'AI' | 'Research' | 'Backend' | 'Products'
 export type ShowcaseProject = Project & {
+  presentation: 'research' | 'app'
   tags: string[]
   filters: ProjectFilter[]
-  image: 'workshop' | 'audio' | 'landscape' | 'asr'
+  image: 'workshop' | 'audio' | 'landscape' | 'asr' | 'torobrent'
   imagePosition: string
   imageScale?: number
 }

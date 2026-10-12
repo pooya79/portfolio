@@ -4,6 +4,7 @@ import symbolsLight from '../assets/images/generated/navigation-symbols-light.we
 import symbolsDark from '../assets/images/generated/navigation-symbols-dark.webp'
 import { useTheme } from '../theme/theme'
 import { EdgeFoliage } from './EdgeFoliage'
+import { projectCollection } from '../pages/projects/data'
 import styles from './Shell.module.css'
 import type { CSSProperties, ReactNode } from 'react'
 
@@ -20,10 +21,11 @@ export function Shell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation()
   const isHome = pathname === '/'
   const isProjects = pathname.startsWith('/projects')
+  const isAppProject = projectCollection.some(project => project.presentation === 'app' && pathname === `/projects/${project.slug}`)
   const isAbout = pathname === '/about'
   const isBlogs = pathname === '/blogs'
   const isContact = pathname === '/contact'
-  return <div className={`${styles.shell} ${isHome ? styles.home : ''} ${isProjects ? styles.projects : ''} ${isAbout ? styles.about : ''} ${isContact ? styles.contact : ''} ${isBlogs ? styles.blogs : ''}`}>
+  return <div className={`${styles.shell} ${isHome ? styles.home : ''} ${isProjects ? styles.projects : ''} ${isAppProject ? styles.appProject : ''} ${isAbout ? styles.about : ''} ${isContact ? styles.contact : ''} ${isBlogs ? styles.blogs : ''}`}>
     <a className="skip-link" href="#main-content" onClick={event => { event.preventDefault(); document.getElementById('main-content')?.focus() }}>Skip to content</a>
     <header className={styles.header} style={{ '--navigation-symbols': `url("${theme === 'light' ? symbolsLight : symbolsDark}")` } as CSSProperties}>
       <Link to="/" className={styles.brand}>

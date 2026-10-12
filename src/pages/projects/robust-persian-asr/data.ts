@@ -6,6 +6,7 @@ export const resultsArchive = `${repository}/tree/main/report`
 export const robustPersianAsr: ShowcaseProject = {
   slug: 'robust-persian-asr',
   title: 'Robust Persian ASR',
+  presentation: 'research',
   description: 'My MS thesis on robust Persian speech recognition with Whisper Small and Medium, multi-condition training, and dual-view fusion.',
   category: 'Research', motif: 'leaf',
   tags: ['Speech AI', 'MS Thesis', 'PyTorch'], filters: ['AI', 'Research'],

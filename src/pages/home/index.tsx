@@ -1,15 +1,23 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { motion, useReducedMotion } from 'motion/react'
-import { ArrowRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react'
-import { robustPersianAsr as project } from '../projects/robust-persian-asr/data'
+import { ArrowRightIcon, CaretLeftIcon, CaretRightIcon, PauseIcon, PlayIcon } from '@phosphor-icons/react'
+import { robustPersianAsr } from '../projects/robust-persian-asr/data'
+import { torobrent, productViews } from '../projects/torobrent/data'
 import { projectImages, projectImageSources } from '../projects/sceneAssets'
 import { Landscape } from './Landscape'
 import { useTheme } from '../../theme/theme'
 import styles from './Home.module.css'
 
+const featuredProjects = [
+  { project: torobrent, alt: productViews[0].alt, width: 1600, height: 900 },
+  { project: robustPersianAsr, alt: 'A sculptural listening pavilion surrounded by a lush garden.', width: 1536, height: 1024 },
+]
+
 export default function Home() {
   const [paused, setPaused] = useState(false)
+  const [featuredIndex, setFeaturedIndex] = useState(0)
+  const { project, alt, width, height } = featuredProjects[featuredIndex]
   const reduced = useReducedMotion()
   const { theme } = useTheme()
   return <section className={styles.hero} aria-labelledby="hero-title">
@@ -27,9 +35,14 @@ export default function Home() {
       <motion.aside className={styles.featured} aria-label="Featured projects" initial={reduced ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .4 }}>
         <div className={styles.cardHeader}>
           <span>FEATURED PROJECT</span>
+          <div className={styles.projectControls} role="group" aria-label="Choose featured project">
+            <button aria-label="Previous featured project" onClick={() => setFeaturedIndex((featuredIndex + featuredProjects.length - 1) % featuredProjects.length)}><CaretLeftIcon size={15} /></button>
+            <span aria-live="polite">{featuredIndex + 1} / {featuredProjects.length}</span>
+            <button aria-label="Next featured project" onClick={() => setFeaturedIndex((featuredIndex + 1) % featuredProjects.length)}><CaretRightIcon size={15} /></button>
+          </div>
         </div>
-        <div className={styles.preview}>
-          <img src={projectImages.asr[theme]} srcSet={projectImageSources('asr', theme)} sizes="(max-width: 800px) 88vw, 392px" alt="A sculptural listening pavilion surrounded by a lush garden." width={1536} height={1024} />
+        <div className={`${styles.preview} ${project.presentation === 'app' ? styles.appPreview : ''}`}>
+          <img src={projectImages[project.image][theme]} srcSet={projectImageSources(project.image, theme)} sizes="(max-width: 800px) 88vw, 392px" alt={alt} width={width} height={height} style={{ objectPosition: project.imagePosition }} />
         </div>
         <h2>{project.title}</h2>
         <p className={styles.description}>{project.description}</p>

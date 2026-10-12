@@ -53,12 +53,12 @@ export default function Projects() {
         </div>
       </div>
       <div className={styles.collectionBody}>
-        <div className={`${styles.projectGrid} ${projectCollection.length === 1 ? styles.singleProject : ''}`}>
+        <div className={`${styles.projectGrid} ${visible.length === 1 ? styles.singleProject : ''}`}>
           {visible.length === 0 && <div className={styles.noProjects}><h2>No projects in this category yet.</h2><p>Explore the research in the full collection.</p><button className="button" onClick={() => setFilter('All')}>Show all projects</button></div>}
           {visible.map(project => <motion.article key={project.slug} layout={!reduced} initial={reduced ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.3 }}>
             <Link to={`/projects/${project.slug}`} className={styles.projectCard}>
-              <div className={styles.cardImage}>
-                <img src={projectImages[project.image][theme]} srcSet={projectImageSources(project.image, theme)} sizes="(max-width: 800px) 88vw, 65vw" width={1536} height={1024} style={{ objectPosition: project.imagePosition, transformOrigin: project.imagePosition, '--image-scale': project.imageScale ?? 1 } as CSSProperties} alt="" loading="lazy" />
+              <div className={`${styles.cardImage} ${project.presentation === 'app' ? styles.appImage : ''}`}>
+                <img src={projectImages[project.image][theme]} srcSet={projectImageSources(project.image, theme)} sizes={visible.length === 1 ? '(max-width: 1000px) 88vw, 65vw' : '(max-width: 540px) 88vw, (max-width: 1000px) 44vw, 36vw'} width={1536} height={1024} style={{ objectPosition: project.imagePosition, transformOrigin: project.imagePosition, '--image-scale': project.imageScale ?? 1 } as CSSProperties} alt="" loading="lazy" />
                 <span className={styles.projectNumber}>{String(projectCollection.indexOf(project) + 1).padStart(2, '0')}</span>
               </div>
               <div className={styles.cardCopy}>

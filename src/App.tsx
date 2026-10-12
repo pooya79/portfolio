@@ -8,6 +8,7 @@ import Contact from './pages/contact'
 import Blogs from './pages/blogs'
 
 const RobustPersianAsr = lazy(() => import('./pages/projects/robust-persian-asr'))
+const TorobRent = lazy(() => import('./pages/projects/torobrent'))
 const BlogDetail = lazy(() => import('./pages/blogs/BlogDetail'))
 const About = lazy(() => import('./pages/about'))
 
@@ -16,7 +17,7 @@ export default function App() {
   const reduced = useReducedMotion()
   const previousPath = useRef(pathname)
   useEffect(() => {
-    const name = pathname === '/projects/robust-persian-asr' ? 'Robust Persian ASR' : pathname === '/' ? 'AI Product Engineer' : pathname.split('/').filter(Boolean).map(part => part.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')).join(' | ')
+    const name = pathname === '/projects/torobrent' ? 'TorobRent' : pathname === '/projects/robust-persian-asr' ? 'Robust Persian ASR' : pathname === '/' ? 'AI Product Engineer' : pathname.split('/').filter(Boolean).map(part => part.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')).join(' | ')
     document.title = `Pouya Fallah | ${name}`
     if (previousPath.current !== pathname) {
       window.scrollTo({ top: 0, behavior: 'instant' })
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/robust-persian-asr" element={<RobustPersianAsr />} />
+          <Route path="/projects/torobrent" element={<TorobRent />} />
           <Route path="/projects/persian-asr" element={<Navigate to="/projects/robust-persian-asr" replace />} />
           <Route path="/projects/robust-speech-recognition" element={<Navigate to="/projects/robust-persian-asr" replace />} />
           <Route path="/blogs" element={<Blogs />} />
