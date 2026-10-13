@@ -43,4 +43,15 @@ The contact form remains entirely in the browser: it opens a prefilled email dra
 
 ## Theme and accessibility
 
+On opening the site, the loader waits for the entry page's website artwork to download and decode, including its decorative backgrounds. Cached artwork gets a 150 ms grace period to avoid flashing the loader; once shown, it stays for at least one second. Slow requests offer an entry button after three seconds and a fifteen-second fallback. The loader does not return during navigation or theme changes.
+
+After entry, a low-priority queue warms the other pages' scenery and photos, with at most two requests scheduled at once. It selects responsive sizes for the current viewport and only the active theme. Changing themes starts warming that theme. Project screenshots, gallery thumbnails, previews, and diagrams are excluded from both the entry wait and background queue; they load normally wherever displayed. The explicit artwork list lives in `src/components/websiteImages.ts` and should be updated when adding website scenery.
+
+Browser regression checks cover timing, slow and failed images, showcase exclusions, navigation, theme switching, mobile sizes, and cached entry. With the dev server running, use Playwright CLI to open it and run the checks:
+
+```sh
+npx --yes --package @playwright/cli playwright-cli open http://127.0.0.1:5173/ --browser chrome
+npx --yes --package @playwright/cli playwright-cli run-code --filename tests/image-loading.browser.js
+```
+
 The theme follows the device preference until a visitor chooses Day or Night. Manual choices persist in local storage when available. CSS variables control all themed surfaces and botanical visuals. Animations honor reduced-motion preferences, and navigation includes a skip link and visible keyboard focus.

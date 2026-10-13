@@ -45,6 +45,10 @@ src/
 - Store both versions together in `src/assets/images/generated/`, using matching names such as `<name>-light.webp` and `<name>-dark.webp` (or the actual output format).
 - Render the light/day asset in light mode and the dark/night asset in dark mode. An image task is complete only when both variants exist; when integrating them, verify that switching themes displays the corresponding asset.
 
+### Image loading and background preloading
+
+- For fast entry and smoother navigation, load the entry page's website imagery first with a one-second minimum loader when needed, then preload other pages' theme-appropriate imagery in the background via `src/components/websiteImages.ts`, excluding project showcase images from both steps and keeping navigation loader-free.
+
 ## Agent skills
 
 ### Issue tracker

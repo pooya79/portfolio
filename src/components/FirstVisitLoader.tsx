@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useLocation } from 'react-router'
+import { useTheme } from '../theme/theme'
+import { preloadImage, preloadInBackground } from './imagePreloading'
+import { otherWebsiteImages, pageWebsiteImages } from './websiteImages'
 import styles from './FirstVisitLoader.module.css'
 
-const storageKey = 'portfolio-intro-seen-v1'
 const preview = import.meta.env.DEV && new URLSearchParams(location.search).get('loader-preview') === '1'
-
-function needsIntroduction() {
-  if (preview) return true
-  try { return localStorage.getItem(storageKey) !== 'true' } catch { return true }
-}
+const minimumDuration = 1000
+const cacheGracePeriod = 150
 
 /** A tiny, resolution-independent solar sculpture. No image request is needed. */
 function SolarSprout() {
@@ -33,10 +33,15 @@ function SolarSprout() {
 }
 
 export function FirstVisitLoader({ children }: { children: ReactNode }) {
-  const [active, setActive] = useState(needsIntroduction)
+  const { pathname } = useLocation()
+  const { theme } = useTheme()
+  const [entry] = useState(() => ({ pathname, theme }))
+  const [active, setActive] = useState(true)
+  const [showing, setShowing] = useState(preview)
   const [leaving, setLeaving] = useState(false)
   const [slow, setSlow] = useState(false)
   const content = useRef<HTMLDivElement>(null)
+  const shownAt = useRef(0)
 
   function dismiss() { setLeaving(true) }
 
@@ -44,53 +49,52 @@ export function FirstVisitLoader({ children }: { children: ReactNode }) {
     if (!active || leaving) return
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    if (preview && !shownAt.current) shownAt.current = performance.now()
+    // Cached images can settle without flashing an unnecessary loading screen.
+    const showTimer = window.setTimeout(() => {
+      if (!shownAt.current) shownAt.current = performance.now()
+      setShowing(true)
+    }, cacheGracePeriod)
     const slowTimer = window.setTimeout(() => setSlow(true), 3000)
-    const timeout = window.setTimeout(() => { if (!preview) setLeaving(true) }, 8000)
-    // Track the actual responsive image selected by the browser, including decode.
-    const decoded = new Map<HTMLImageElement, { src: string; ready: boolean }>()
+    const timeout = window.setTimeout(() => { if (!preview) setLeaving(true) }, 15000)
     let cancelled = false
-    let readyPasses = 0
+    let imagesReady = false
+    let finished = false
     const check = () => {
-      if (preview || !content.current?.querySelector('[data-loading-content]')) return
-      const images = [...content.current.querySelectorAll('img')].filter(img => {
-        const rect = img.getBoundingClientRect()
-        return rect.width > 0 && rect.height > 0 && rect.top < innerHeight && rect.bottom > 0 && rect.left < innerWidth && rect.right > 0
-      })
-      const ready = images.map(img => {
-        if (!img.complete) return false
-        if (!img.naturalWidth) return true // Broken images must never block entry.
-        const src = img.currentSrc || img.src
-        let entry = decoded.get(img)
-        if (entry?.src !== src) {
-          entry = { src, ready: false }
-          decoded.set(img, entry)
-          const current = entry
-          img.decode().catch(() => {}).then(() => { if (!cancelled) current.ready = true })
-        }
-        return entry.ready
-      }).every(Boolean)
-      // Recheck after layout settles; there is no minimum animation duration.
-      readyPasses = ready ? readyPasses + 1 : 0
-      if (readyPasses >= 2) setLeaving(true)
+      if (preview || cancelled || finished || !imagesReady || !content.current?.querySelector('[data-loading-content]')) return
+      if (shownAt.current && performance.now() - shownAt.current < minimumDuration) return
+      finished = true
+      clearTimeout(showTimer)
+      if (shownAt.current) setLeaving(true)
+      else setActive(false)
     }
-    const interval = window.setInterval(check, 100)
-    check()
+    const interval = window.setInterval(check, 25)
+    // Match the browser's responsive selection and wait for decode. The allowlist
+    // includes CSS backgrounds but deliberately excludes project showcases.
+    void Promise.all(pageWebsiteImages(pathname, theme).map(source => preloadImage(source, 'high'))).then(() => {
+      imagesReady = true
+      check()
+    })
     return () => {
       cancelled = true
       clearInterval(interval)
+      clearTimeout(showTimer)
       clearTimeout(slowTimer)
       clearTimeout(timeout)
       document.body.style.overflow = previousOverflow
     }
-  }, [active, leaving])
+  }, [active, leaving, pathname, theme])
+
+  useEffect(() => {
+    if (active || preview) return
+    // The original entry page also needs warming if the visitor changes themes.
+    return preloadInBackground(otherWebsiteImages(entry.theme === theme ? entry.pathname : '', theme))
+  }, [active, entry, theme])
 
   useEffect(() => {
     if (!leaving) return
     const timer = window.setTimeout(() => {
       setActive(false)
-      if (!preview) {
-        try { localStorage.setItem(storageKey, 'true') } catch { /* Storage is optional. */ }
-      }
       if (document.activeElement?.closest('[data-intro]')) {
         requestAnimationFrame(() => document.getElementById('main-content')?.focus({ preventScroll: true }))
       }
@@ -99,12 +103,12 @@ export function FirstVisitLoader({ children }: { children: ReactNode }) {
   }, [leaving])
 
   return <>
-    <div ref={content} inert={active} aria-hidden={active || undefined} style={{ display: 'contents' }}>{children}</div>
-    {active && <div data-intro className={`${styles.overlay} ${leaving ? styles.leaving : ''}`}>
+    <div ref={content} inert={active} aria-hidden={active || undefined} style={{ display: 'contents', visibility: active && !showing ? 'hidden' : undefined }}>{children}</div>
+    {active && showing && <div data-intro className={`${styles.overlay} ${leaving ? styles.leaving : ''}`}>
       <div className={styles.center}>
         <SolarSprout />
         <p role="status" className={styles.caption}>Growing brighter<span className={styles.period}>.</span></p>
-        {(slow || preview) && <button className={styles.continue} onClick={dismiss}>Enter the garden <span aria-hidden="true">↗</span></button>}
+        {slow && <button className={styles.continue} onClick={dismiss}>Enter the garden <span aria-hidden="true">↗</span></button>}
       </div>
     </div>}
   </>
