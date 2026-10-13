@@ -1,0 +1,25 @@
+.section { max-width: 1500px; margin: 40px auto 20px; padding-top: 30px; border-top: 1px solid var(--line); }
+.section h2 { font-family: var(--font-body); font-size: 28px; font-weight: 400; letter-spacing: -.8px; line-height: 1.2; margin-bottom: 10px; }
+.intro { color: var(--quiet); font-size: 14px; line-height: 1.6; margin: 0 0 22px; }
+.switcher { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+.switcher button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--line); color: var(--quiet); background: var(--paper); font-size: 13px; }
+.switcher button[aria-pressed='true'] { color: var(--ink); border-color: var(--sage); background: var(--tint); }
+.switcher button:hover { border-color: var(--sage); }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; list-style: none; padding: 0; margin: 0; }
+.stepHeading { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--sage); margin-bottom: 12px; }
+.stepHeading h3 { color: var(--ink); font-family: var(--font-body); font-size: 16px; font-weight: 500; line-height: 1.4; letter-spacing: -.2px; }
+.stepHeading svg { flex-shrink: 0; }
+.steps p, .note { color: var(--quiet); font-size: 13px; line-height: 1.75; margin: 0; }
+.note { margin-top: 24px; padding-left: 15px; border-left: 2px solid var(--sage); max-width: 100ch; }
+@media (prefers-reduced-motion: no-preference) { .switcher button { transition: background 180ms, border-color 180ms; } }
+@media (max-width: 1100px) { .steps { grid-template-columns: 1fr 1fr; gap: 24px; } }
+@media (max-width: 540px) {
+  .section { margin-top: 30px; }
+  .section h2 { font-size: 26px; }
+  .steps { grid-template-columns: 1fr; gap: 22px; }
+  .stepHeading { margin-bottom: 6px; }
+  .stepHeading svg { transform: rotate(90deg); }
+  .switcher { display: grid; grid-template-columns: 1fr; }
+  .switcher button { justify-content: center; }
+  .steps p, .note { font-size: 14px; }
+}

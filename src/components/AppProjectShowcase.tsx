@@ -1,12 +1,12 @@
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
-import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon, CalendarBlankIcon, DatabaseIcon, GithubLogoIcon, StackIcon, UserIcon, type Icon } from '@phosphor-icons/react'
+import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon, BuildingsIcon, CalendarBlankIcon, DatabaseIcon, GithubLogoIcon, StackIcon, UserIcon, type Icon } from '@phosphor-icons/react'
 import { Reveal } from './Reveal'
 import { useTheme } from '../theme/theme'
 import styles from './AppProjectShowcase.module.css'
 
 type Highlight = { icon: Icon; title: string; description: string }
-type AppScreen = { id: string; label: string; src: string | { light: string; dark: string }; alt: string; caption: string; width: number; height: number }
+type AppScreen = { id: string; label: string; src: string | { light: string; dark: string }; thumbnail?: string; alt: string; caption: string; width: number; height: number }
 export type AppProjectContent = {
   title: string
   subtitle: string
@@ -14,7 +14,8 @@ export type AppProjectContent = {
   year: number
   role: string
   heroBackground?: { light: string; dark: string }
-  repository: string
+  repository?: string
+  organization?: { name: string; url: string }
   technologies: string[]
   screens: AppScreen[]
   visualKind?: 'screenshot' | 'diagram'
@@ -32,7 +33,7 @@ export type AppProjectContent = {
 }
 
 // App projects use a compact visual overview; research keeps its detailed case-study pages.
-export function AppProjectShowcase({ project }: { project: AppProjectContent }) {
+export function AppProjectShowcase({ project, children }: { project: AppProjectContent; children?: ReactNode }) {
   const { theme } = useTheme()
   const [screenId, setScreenId] = useState(project.screens[0].id)
   const screen = project.screens.find(item => item.id === screenId)!
@@ -46,7 +47,8 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
         <h1>{project.title}</h1>
         <p className={styles.subtitle}>{project.subtitle}</p>
         <p className={styles.summary}>{project.summary}</p>
-        <a className={styles.primary} href={project.repository} target="_blank" rel="noreferrer"><GithubLogoIcon size={20} /> View on GitHub <ArrowUpRightIcon size={16} /></a>
+        {project.repository ? <a className={styles.primary} href={project.repository} target="_blank" rel="noreferrer"><GithubLogoIcon size={20} /> View on GitHub <ArrowUpRightIcon size={16} /></a>
+          : project.organization && <a className={styles.primary} href={project.organization.url} target="_blank" rel="noreferrer"><BuildingsIcon size={20} /> Built for {project.organization.name} <ArrowUpRightIcon size={16} /></a>}
       </Reveal>
 
       <Reveal className={styles.gallery} delay={0.08}>
@@ -58,7 +60,7 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
         </figure>
         {project.screens.length > 1 && <div className={styles.screenPicker} style={{ gridTemplateColumns: `repeat(${project.screens.length}, minmax(0, 1fr))` }} role="group" aria-label={project.visualKind === 'diagram' ? 'Architecture diagrams' : 'Application screenshots'}>
           {project.screens.map(item => <button key={item.id} aria-pressed={screen.id === item.id} aria-controls="app-preview" onClick={() => setScreenId(item.id)}>
-            <img src={typeof item.src === 'string' ? item.src : item.src[theme]} alt="" width={item.width} height={item.height} />
+            <img src={item.thumbnail ?? (typeof item.src === 'string' ? item.src : item.src[theme])} alt="" width={item.width} height={item.height} />
             <span>{item.label}</span>
           </button>)}
         </div>}
@@ -109,5 +111,6 @@ export function AppProjectShowcase({ project }: { project: AppProjectContent }) 
         </li>)}</ul>
       </Reveal>
     </div>
+    {children}
   </article>
 }

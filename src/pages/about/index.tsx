@@ -4,7 +4,7 @@ import { ArrowRightIcon, BicycleIcon, BookOpenIcon, BrainIcon, CameraIcon, CodeI
 import { Reveal } from '../../components/Reveal'
 import { useTheme } from '../../theme/theme'
 import { biography, education, interests, journey, philosophy, techStack } from './data'
-import { aboutImages, gardenImages } from './sceneAssets'
+import { aboutImages, gardenImages, universityImages } from './sceneAssets'
 import styles from './About.module.css'
 
 const icons = { code: CodeIcon, brain: BrainIcon, research: NotebookIcon, rocket: RocketLaunchIcon, server: HardDrivesIcon, desktop: DesktopIcon, tools: ToolboxIcon, leaf: LeafIcon, people: UsersThreeIcon, plant: PlantIcon, heart: HeartIcon, book: BookOpenIcon, camera: CameraIcon, bicycle: BicycleIcon }
@@ -29,6 +29,7 @@ export default function About() {
           <p className={styles.eyebrow}>{biography.eyebrow}</p>
           <h1 id="about-title">About</h1>
           <p className={styles.subtitle}>{biography.subtitle}</p>
+          <p className={styles.introduction}>{biography.introduction}</p>
         </Reveal>
         <Reveal className={styles.quote} delay={0.15}>
           <PlantIcon size={32} weight="duotone" aria-hidden="true" />
@@ -62,8 +63,12 @@ export default function About() {
           <section aria-labelledby="education-title">
             <SectionHeading icon={GraduationCapIcon} title="Education" description="A foundation in engineering, with a focus on AI and real-world impact." id="education-title" />
             <div className={styles.educationGrid}>{education.map(item => <article key={item.degree}>
-              <div className={styles.educationImage}><img src={aboutImages[item.image][theme]} width={836} height={477} alt="" loading="lazy" style={{ objectPosition: item.position }} /></div>
+              <figure className={styles.campusPhoto}>
+                <div className={styles.educationImage}><img src={universityImages[item.image].src} width={universityImages[item.image].width} height={universityImages[item.image].height} alt={universityImages[item.image].alt} loading="lazy" style={{ objectPosition: item.position }} /></div>
+                <figcaption>Photo: <a href={universityImages[item.image].source}>{universityImages[item.image].author}</a> · <a href={universityImages[item.image].licenseUrl}>{universityImages[item.image].license}</a> · cropped to fit</figcaption>
+              </figure>
               <h3>{item.degree}</h3><p>{item.institution}</p><p className={styles.educationPeriod}>{item.period}</p>
+              <p className={styles.thesis}><strong>Thesis</strong>{item.thesis}</p>
               <ul className={styles.tags} aria-label="Areas of study">{item.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
             </article>)}</div>
           </section>
