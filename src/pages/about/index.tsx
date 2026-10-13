@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import type { Icon } from '@phosphor-icons/react'
-import { ArrowRightIcon, BicycleIcon, BookOpenIcon, BrainIcon, CameraIcon, CodeIcon, DesktopIcon, GraduationCapIcon, HeartIcon, LeafIcon, MapTrifoldIcon, MountainsIcon, NotebookIcon, PlantIcon, RocketLaunchIcon, HardDrivesIcon, ToolboxIcon, UsersThreeIcon, GearIcon } from '@phosphor-icons/react'
+import { ArrowRightIcon, BicycleIcon, BookOpenIcon, BrainIcon, GameControllerIcon, CodeIcon, DesktopIcon, GraduationCapIcon, HeartIcon, LeafIcon, MapTrifoldIcon, MountainsIcon, NotebookIcon, PlantIcon, RocketLaunchIcon, HardDrivesIcon, ToolboxIcon, UsersThreeIcon, GearIcon } from '@phosphor-icons/react'
 import { Reveal } from '../../components/Reveal'
 import { useTheme } from '../../theme/theme'
 import { biography, education, interests, journey, philosophy, techStack } from './data'
 import { aboutImages, gardenImages, universityImages } from './sceneAssets'
 import styles from './About.module.css'
 
-const icons = { code: CodeIcon, brain: BrainIcon, research: NotebookIcon, rocket: RocketLaunchIcon, server: HardDrivesIcon, desktop: DesktopIcon, tools: ToolboxIcon, leaf: LeafIcon, people: UsersThreeIcon, plant: PlantIcon, heart: HeartIcon, book: BookOpenIcon, camera: CameraIcon, bicycle: BicycleIcon }
+const icons = { code: CodeIcon, brain: BrainIcon, research: NotebookIcon, rocket: RocketLaunchIcon, server: HardDrivesIcon, desktop: DesktopIcon, tools: ToolboxIcon, leaf: LeafIcon, people: UsersThreeIcon, plant: PlantIcon, heart: HeartIcon, book: BookOpenIcon, game: GameControllerIcon, bicycle: BicycleIcon }
 
 function SectionHeading({ icon: HeadingIcon, title, description, id }: { icon: Icon; title: string; description: string; id: string }) {
   return <div className={styles.sectionHeading}>

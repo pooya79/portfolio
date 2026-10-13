@@ -19,9 +19,9 @@ export const education = [
   { degree: 'B.Sc. in Electrical Engineering', institution: 'Amirkabir University of Technology (Tehran Polytechnic)', period: '2018 – 2023', thesis: 'Reinforcement Learning for a Pick-and-Place Robotic Arm', topics: ['Reinforcement Learning', 'Robotics', 'Electrical Engineering'], image: 'amirkabir', position: '50% 50%' },
 ] as const
 export const techStack = [
-  { category: 'Languages', icon: 'code', tools: ['Python', 'Go', 'JavaScript', 'SQL'], additional: ['TypeScript', 'Bash'] },
+  { category: 'Languages', icon: 'code', tools: ['Python', 'Go', 'TypeScript', 'SQL'], additional: ['JavaScript', 'PHP', 'Bash'] },
   { category: 'Backend & Infra', icon: 'server', tools: ['FastAPI', 'Django', 'PostgreSQL', 'Redis', 'Docker', 'Linux'], additional: ['Nginx', 'RabbitMQ'] },
-  { category: 'Frontend', icon: 'desktop', tools: ['HTMX', 'Tailwind CSS', 'React', 'Next.js'], additional: ['Vite', 'Motion'] },
+  { category: 'Frontend', icon: 'desktop', tools: ['HTMX', 'Tailwind CSS', 'React', 'Next.js'], additional: ['Vite', 'Jinja'] },
   { category: 'AI / ML', icon: 'brain', tools: ['PyTorch', 'LLMs', 'Speech / ASR', 'Computer Vision', 'AI Systems'], additional: ['Hugging Face', 'NumPy'] },
   { category: 'Tools', icon: 'tools', tools: ['Git', 'Docker', 'Linux', 'VS Code', 'Notion', 'Figma'], additional: ['Jupyter', 'GitHub Actions'] },
 ] as const
@@ -34,6 +34,6 @@ export const philosophy = [
 export const interests = [
   { label: 'Nature & Hiking', icon: 'plant' },
   { label: 'Reading & Learning', icon: 'book' },
-  { label: 'Photography', icon: 'camera' },
+  { label: 'Gaming', icon: 'game' },
   { label: 'Cycling', icon: 'bicycle' },
 ] as const
