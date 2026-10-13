@@ -15,11 +15,11 @@
 .primary { display: inline-flex; align-items: center; justify-content: center; gap: 9px; border-radius: 28px; background: var(--ink); color: var(--paper); min-height: 44px; padding: 11px 19px; white-space: nowrap; font-size: 12px; }
 .gallery { min-width: 0; align-self: center; padding-top: 10px; }
 .preview { margin: 0; }
-.screenshotLink { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--tint); box-shadow: 0 18px 45px #18352313; }
+.screenshotLink { display: block; width: 100%; padding: 0; cursor: zoom-in; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--tint); box-shadow: 0 18px 45px #18352313; }
 .screenshotLink img { display: block; width: 100%; height: clamp(200px, calc(100dvh - 510px), 325px); object-fit: contain; object-position: center; }
 .preview figcaption { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 3px; font-size: 10px; color: var(--quiet); }
-.preview figcaption a { display: inline-flex; align-items: center; gap: 4px; min-height: 24px; color: var(--sage); }
-.preview figcaption a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.preview figcaption button { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; padding: 4px 0 4px 8px; border: 0; background: transparent; color: var(--sage); font-size: inherit; }
+.preview figcaption button:hover { text-decoration: underline; text-underline-offset: 3px; }
 .screenPicker { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 .screenPicker button { display: flex; align-items: center; gap: 8px; padding: 5px; min-height: 44px; background: transparent; color: var(--quiet); border: 1px solid transparent; border-radius: 8px; text-align: left; font-size: 11px; }
 .screenPicker button[aria-pressed='true'] { background: var(--tint); border-color: var(--sage); color: var(--ink); }
@@ -59,7 +59,7 @@
   .primary:active { transform: translateY(0); }
   .screenPicker button { transition: border-color 200ms, background 200ms; }
   .screenPicker button:hover { background: var(--tint); }
-  .screenshotLink { animation: preview-enter 250ms ease-out; }
+  .screenshotLink img { animation: preview-enter 250ms ease-out; }
   @keyframes preview-enter { from { opacity: .6; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 }
 @media (min-width: 1101px) and (max-height: 820px) {

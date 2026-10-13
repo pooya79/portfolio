@@ -1,7 +1,8 @@
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
-import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon, BuildingsIcon, CalendarBlankIcon, DatabaseIcon, GithubLogoIcon, StackIcon, UserIcon, type Icon } from '@phosphor-icons/react'
+import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon, ArrowsOutIcon, BuildingsIcon, CalendarBlankIcon, DatabaseIcon, GithubLogoIcon, StackIcon, UserIcon, type Icon } from '@phosphor-icons/react'
 import { Reveal } from './Reveal'
+import { ImageViewer } from './ImageViewer'
 import { useTheme } from '../theme/theme'
 import styles from './AppProjectShowcase.module.css'
 
@@ -36,6 +37,7 @@ export type AppProjectContent = {
 export function AppProjectShowcase({ project, children }: { project: AppProjectContent; children?: ReactNode }) {
   const { theme } = useTheme()
   const [screenId, setScreenId] = useState(project.screens[0].id)
+  const [viewerOpen, setViewerOpen] = useState(false)
   const screen = project.screens.find(item => item.id === screenId)!
   const screenSrc = typeof screen.src === 'string' ? screen.src : screen.src[theme]
 
@@ -53,10 +55,10 @@ export function AppProjectShowcase({ project, children }: { project: AppProjectC
 
       <Reveal className={styles.gallery} delay={0.08}>
         <figure className={styles.preview} id="app-preview">
-          <a className={styles.screenshotLink} key={screen.id} href={screenSrc} target="_blank" rel="noreferrer" aria-label={`Enlarge ${screen.label.toLowerCase()} ${project.visualKind ?? 'screenshot'} (opens in a new tab)`}>
-            <img src={screenSrc} alt={screen.alt} width={screen.width} height={screen.height} fetchPriority="high" />
-          </a>
-          <figcaption><span aria-live="polite">{screen.caption}</span><a href={screenSrc} target="_blank" rel="noreferrer">Enlarge <ArrowUpRightIcon size={13} /></a></figcaption>
+          <button type="button" className={styles.screenshotLink} onClick={() => setViewerOpen(true)} aria-haspopup="dialog" aria-label={`Enlarge ${screen.label.toLowerCase()} ${project.visualKind ?? 'screenshot'}`}>
+            <img key={screen.id} src={screenSrc} alt={screen.alt} width={screen.width} height={screen.height} fetchPriority="high" />
+          </button>
+          <figcaption><span aria-live="polite">{screen.caption}</span><button type="button" onClick={() => setViewerOpen(true)} aria-haspopup="dialog">Enlarge <ArrowsOutIcon size={13} aria-hidden="true" /></button></figcaption>
         </figure>
         {project.screens.length > 1 && <div className={styles.screenPicker} style={{ gridTemplateColumns: `repeat(${project.screens.length}, minmax(0, 1fr))` }} role="group" aria-label={project.visualKind === 'diagram' ? 'Architecture diagrams' : 'Application screenshots'}>
           {project.screens.map(item => <button key={item.id} aria-pressed={screen.id === item.id} aria-controls="app-preview" onClick={() => setScreenId(item.id)}>
@@ -65,6 +67,8 @@ export function AppProjectShowcase({ project, children }: { project: AppProjectC
           </button>)}
         </div>}
       </Reveal>
+
+      {viewerOpen && <ImageViewer title={project.title} images={project.screens.map(item => ({ ...item, src: typeof item.src === 'string' ? item.src : item.src[theme] }))} selectedId={screenId} onSelect={setScreenId} onClose={() => setViewerOpen(false)} />}
 
       <Reveal className={styles.facts} delay={0.15}>
         <div className={styles.year}><div className={styles.factHeading}><CalendarBlankIcon size={23} /><h2>Year</h2></div><p>{project.year}</p></div>
